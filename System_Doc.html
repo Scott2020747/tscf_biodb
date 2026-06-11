@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>TSCF Vision Partners | Tertiary Students Christian Fellowship</title>
+  <!-- Google Fonts & Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Custom overrides / additional style for better cards & form elements -->
+  <style>
+    /* smooth scroll behavior and custom focus rings */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
+    }
+    .card-hover {
+      transition: all 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+    }
+    input, select, textarea {
+      transition: all 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      ring: 2px solid #3b82f6;
+      border-color: #3b82f6;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .radio-card {
+      transition: all 0.2s;
+    }
+    .radio-card:hover {
+      border-color: #6366f1;
+      background-color: #f5f3ff;
+    }
+    .form-section {
+      animation: fadeSlideUp 0.5s ease-out forwards;
+    }
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .admin-toggle {
+      transition: 0.2s;
+    }
+    .status-badge {
+      font-weight: 500;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+    <!-- Entire application container with white background & rounded shadow -->
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+      
+      <!-- ================= HEADER SECTION ================= -->
+      <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-800 text-white px-6 py-8 md:px-10 md:py-10">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <!-- Logo + TSCF title -->
+          <div class="flex items-center gap-4 flex-wrap justify-center md:justify-start">
+            <div class="bg-white/20 backdrop-blur-sm rounded-full p-3 shadow-lg">
+              <div class="w-14 h-14 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
+                <span class="text-white font-black text-2xl tracking-tight">TSCF</span>
+              </div>
+            </div>
+            <div class="text-center md:text-left">
+              <h1 class="text-xl md:text-3xl font-extrabold tracking-tight">TERTIARY STUDENTS CHRISTIAN FELLOWSHIP</h1>
+              <p class="text-sm text-indigo-100 mt-1">National Membership: P. O. Box 6329 Port Boroko, National Capital District</p>
+              <p class="text-sm text-indigo-100"><i class="fas fa-mobile-alt mr-1"></i> Mobile: 73277901</p>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-xl px-6 py-3 text-center border border-white/20">
+            <div class="text-xs uppercase tracking-wide">The Voice of Truth</div>
+            <div class="text-2xl font-bold italic">SALT & LIGHT</div>
+          </div>
+        </div>
+
+        <!-- Vision / Mission / Values row (responsive grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pt-2 border-t border-white/20">
+          <div class="text-center p-3">
+            <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2"><i class="fas fa-lightbulb text-2xl"></i></div>
+            <h3 class="font-bold text-lg">Our Vision</h3>
+            <p class="text-sm text-indigo-100">To mobilize and facilitate the movement of graduates to impact the marketplace and the nation towards national salvation and transformation</p>
+          </div>
+          <div class="text-center p-3 border-l-0 md:border-l border-r-0 md:border-r border-white/20">
+            <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2"><i class="fas fa-users text-2xl"></i></div>
+            <h3 class="font-bold text-lg">Our Mission</h3>
+            <p class="text-sm text-indigo-100">Promoting a kingdom mindset through divine alignment, strategic alliance, partnership and fellowship amongst all graduates to become gatekeepers in our nation.</p>
+          </div>
+          <div class="text-center p-3">
+            <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2"><i class="fas fa-hand-holding-heart text-2xl"></i></div>
+            <h3 class="font-bold text-lg">Core Values</h3>
+            <p class="text-sm text-indigo-100">Truth (God's Word), Servant Leadership, Integrity, Teamwork, Empowerment, Partnership and Advocacy</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- main title "TSCF VISION PARTNERS FORM 2026" -->
+      <div class="text-center pt-8 pb-3">
+        <h2 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-indigo-700 to-purple-700 bg-clip-text text-transparent">TSCF VISION PARTNERS FORM 2026</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mt-3 rounded-full"></div>
+      </div>
+
+      <!-- ================= FORM ================= -->
+      <form id="applicationForm" class="px-6 md:px-12 py-6 space-y-10">
+        <!-- Section 1: GENERAL INFORMATION -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</span>
+            <h3 class="text-xl font-bold text-gray-800">GENERAL INFORMATION</h3>
+          </div>
+          <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Surname *</label><input type="text" name="surname" id="surname" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-400" required></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Given Name *</label><input type="text" name="given_name" id="given_name" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-400" required></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Institution</label><input type="text" name="institution" id="institution" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Date of Birth</label><input type="date" name="dob" id="dob" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Sex</label><select name="sex" id="sex" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 bg-white"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Marital Status</label><select name="marital_status" id="marital_status" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"><option value="">Select</option><option>Married</option><option>Single</option><option>Divorced</option><option>Other</option></select></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Home Province</label><input type="text" name="home_province" id="home_province" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Country</label><input type="text" name="country" id="country" value="Papua New Guinea" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Denomination</label><input type="text" name="denomination" id="denomination" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div class="md:col-span-2 lg:col-span-3"><label class="block text-sm font-semibold text-gray-700 mb-1">Address</label><textarea name="address" id="address" rows="2" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></textarea></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1"><i class="fas fa-phone-alt mr-1"></i> Phone</label><input type="text" name="phone" id="phone" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1"><i class="fas fa-mobile-alt mr-1"></i> Mobile</label><input type="text" name="mobile" id="mobile" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1"><i class="far fa-envelope mr-1"></i> Email *</label><input type="email" name="email" id="email" class="w-full border border-gray-300 rounded-lg px-4 py-2.5" required></div>
+          </div>
+        </div>
+
+        <!-- Section 2: EDUCATIONAL INFORMATION -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</span>
+            <h3 class="text-xl font-bold text-gray-800">EDUCATIONAL INFORMATION</h3>
+          </div>
+          <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">College / University attended</label><input type="text" name="college_university" id="college_university" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">As a member / Leader</label><input type="text" name="member_role" id="member_role" placeholder="Member / Leader / Other" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Year of Graduation</label><input type="number" name="year_of_graduation" id="year_of_graduation" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+            <div class="md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">Field of Study</label><input type="text" name="field_of_study" id="field_of_study" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
+          </div>
+        </div>
+
+        <!-- Section 3: PARTNERS PROGRAMS + banking -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</span>
+            <h3 class="text-xl font-bold text-gray-800">PARTNERS PROGRAMS</h3>
+          </div>
+          <div class="p-6 space-y-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Graduate Programs (select one)</label>
+              <select name="graduate_program" id="graduate_program" class="w-full md:w-2/3 border border-gray-300 rounded-lg px-4 py-2.5 bg-white">
+                <option value="">-- Choose a program --</option>
+                <option>Moore Bible College</option><option>Queensland Theological Seminary</option><option>Ministry Apprentice (MA)</option>
+                <option>SAIACS - India</option><option>Corporate Training</option><option>Ministry Training Program</option>
+                <option>Seminars</option><option>Conferences</option><option>Empowerment Training</option>
+              </select>
+            </div>
+
+            <!-- Donation row -->
+            <div class="bg-indigo-50 rounded-xl p-5">
+              <p class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-donate text-indigo-600"></i> Donation Amounts (Kina)</p>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div><label class="text-xs text-gray-600">Fortnightly (K)</label><input type="number" step="0.01" name="fortnightly_amount" id="fortnightly_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
+                <div><label class="text-xs text-gray-600">Monthly (K)</label><input type="number" step="0.01" name="monthly_amount" id="monthly_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
+                <div><label class="text-xs text-gray-600">Yearly (K)</label><input type="number" step="0.01" name="yearly_amount" id="yearly_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
+                <div><label class="text-xs text-gray-600">One-time Donation</label><input type="number" step="0.01" name="donation_amount" id="donation_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
+              </div>
+            </div>
+
+            <!-- Banking details card like the image -->
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center md:text-left">
+              <h4 class="font-bold text-blue-900 flex items-center gap-2 justify-center md:justify-start"><i class="fas fa-university"></i> TSCF Banking details</h4>
+              <p class="font-mono text-sm mt-2">Tertiary Students Christian Fellowship<br>1000435676 | Bank South Pacific | Boroko Banking Centre<br>BSB NO: 088-943 | SWIFT CODE: BOSPPGPM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: TYPE OF MEMBERSHIP -->
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
+          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">4</span>
+            <h3 class="text-xl font-bold text-gray-800">TYPE OF MEMBERSHIP</h3>
+          </div>
+          <div class="p-6 space-y-6">
+            <div class="flex flex-wrap gap-6 items-center">
+              <label class="flex items-center gap-2"><input type="radio" name="membership_new_renewal" value="New" checked> <span class="font-medium">New Application</span></label>
+              <label class="flex items-center gap-2"><input type="radio" name="membership_new_renewal" value="Renewal"> <span class="font-medium">Renewal</span></label>
+              <div id="renewalNumberContainer" class="hidden"><label class="text-sm text-gray-600 ml-2">Membership No.:</label><input type="text" name="membership_number" id="membership_number" placeholder="TSCF-XXXX" class="ml-2 border rounded-md px-3 py-1.5 w-36"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card hover:bg-gray-50"><input type="radio" name="membership_type" value="Student Member"> <div><span class="font-bold">Student Member</span><br><span class="text-sm text-gray-500">K20/year</span></div></label>
+              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card"><input type="radio" name="membership_type" value="Graduate Member"> <div><span class="font-bold">Graduate Member</span><br><span class="text-sm text-gray-500">K200/year</span></div></label>
+              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card"><input type="radio" name="membership_type" value="Life Member"> <div><span class="font-bold">Life Member</span><br><span class="text-sm text-gray-500">K2500 one-off</span></div></label>
+              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card"><input type="radio" name="membership_type" value="Partner"> <div><span class="font-bold">Partner</span><br><span class="text-sm text-gray-500">Open amount</span></div></label>
+            </div>
+            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Custom Amount (Kina)</label><input type="number" step="0.01" name="membership_amount" id="membership_amount" placeholder="Enter custom amount" class="w-48 border rounded-lg px-4 py-2"></div>
+          </div>
+        </div>
+
+        <!-- Submit button -->
+        <div class="text-center pb-4">
+          <button type="submit" id="submitBtn" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-3 px-12 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"><i class="fas fa-paper-plane mr-2"></i> Submit Application</button>
+        </div>
+      </form>
+
+      <!-- ================ ADMIN PANEL TOGGLE (client-side mock display + localstorage demo) ================ -->
+      <div class="px-6 md:px-12 pb-4">
+        <div class="text-center mt-4">
+          <button id="adminToggleBtn" class="bg-gray-800 text-white px-5 py-2 rounded-lg text-sm hover:bg-gray-900 transition"><i class="fas fa-lock mr-2"></i> Show Admin Panel (demo)</button>
+        </div>
+        <div id="adminPanel" class="hidden mt-6 bg-gray-50 rounded-2xl border border-gray-200 p-6 overflow-x-auto">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fas fa-chalkboard-user"></i> Admin Dashboard — Recent Submissions</h3>
+          <div class="text-sm text-gray-500 mb-3"><i class="fas fa-info-circle"></i> Demo mode: submissions stored in browser localStorage. Approve/Reject/Delete works locally.</div>
+          <table class="min-w-full bg-white rounded-xl shadow-sm" id="adminTable">
+            <thead class="bg-gray-100 border-b">
+              <tr><th class="p-3 text-left">ID</th><th class="p-3 text-left">Full Name</th><th class="p-3 text-left">Email</th><th class="p-3 text-left">Membership</th><th class="p-3 text-left">Status</th><th class="p-3 text-left">Actions</th></tr>
+            </thead>
+            <tbody id="adminTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="bg-gray-900 text-white mt-10 py-8 text-center border-t border-gray-800">
+        <div class="flex justify-center mb-3">
+          <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg"><span class="text-white font-bold text-xl">TSCF</span></div>
+        </div>
+        <p class="text-xs opacity-80">TSCF Vision Partners Application Form 2026</p>
+        <p class="text-xs opacity-70 mt-1">&copy; Tertiary Students Christian Fellowship 2026. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------- CLIENT SIDE DATABASE (localStorage simulation for demo, but complete functionality)
+    // Load members from localStorage or initialize sample data
+    let members = [];
+
+    function loadMembersFromStorage() {
+      const stored = localStorage.getItem('tscf_members');
+      if(stored) {
+        members = JSON.parse(stored);
+      } else {
+        // sample placeholder data
+        members = [];
+        localStorage.setItem('tscf_members', JSON.stringify(members));
+      }
+      renderAdminTable();
+    }
+
+    function saveMembers() {
+      localStorage.setItem('tscf_members', JSON.stringify(members));
+      renderAdminTable();
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminTableBody');
+      if(!tbody) return;
+      if(members.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center p-6 text-gray-400">No applications yet. Submit one to see here.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = members.map(member => `
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">${member.id}</td>
+          <td class="p-3">${member.surname || ''}, ${member.given_name || ''}</td>
+          <td class="p-3">${member.email || ''}</td>
+          <td class="p-3">${member.membership_type || 'N/A'}</td>
+          <td class="p-3"><span class="status-badge ${member.application_status === 'approved' ? 'bg-green-100 text-green-700' : member.application_status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">${member.application_status || 'pending'}</span></td>
+          <td class="p-3 space-x-2">
+            <select data-id="${member.id}" class="status-select px-2 py-1 border rounded text-sm">
+              <option value="pending" ${member.application_status === 'pending' ? 'selected' : ''}>Pending</option>
+              <option value="approved" ${member.application_status === 'approved' ? 'selected' : ''}>Approved</option>
+              <option value="rejected" ${member.application_status === 'rejected' ? 'selected' : ''}>Rejected</option>
+            </select>
+            <button data-id="${member.id}" class="delete-member bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600"><i class="fas fa-trash-alt"></i></button>
+          </td>
+        </tr>
+      `).join('');
+      // attach dynamic events
+      document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('change', (e) => {
+          const id = parseInt(select.getAttribute('data-id'));
+          const newStatus = select.value;
+          const member = members.find(m => m.id === id);
+          if(member) { member.application_status = newStatus; saveMembers(); showToast(`Status updated to ${newStatus}`, 'success'); }
+        });
+      });
+      document.querySelectorAll('.delete-member').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = parseInt(btn.getAttribute('data-id'));
+          if(confirm('Delete this application permanently?')) {
+            members = members.filter(m => m.id !== id);
+            saveMembers();
+            showToast('Application deleted', 'info');
+          }
+        });
+      });
+    }
+
+    function showToast(msg, type = 'success') {
+      let toastDiv = document.getElementById('dynamic-toast');
+      if(!toastDiv) {
+        toastDiv = document.createElement('div');
+        toastDiv.id = 'dynamic-toast';
+        toastDiv.className = 'fixed bottom-5 right-5 z-50 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl text-sm transition-all duration-300 opacity-0';
+        document.body.appendChild(toastDiv);
+      }
+      toastDiv.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>${msg}`;
+      toastDiv.classList.remove('opacity-0');
+      toastDiv.classList.add('opacity-100');
+      setTimeout(() => {
+        toastDiv.classList.add('opacity-0');
+      }, 2800);
+    }
+
+    // generate new id
+    function getNextId() { return members.length > 0 ? Math.max(...members.map(m=>m.id)) + 1 : 1; }
+
+    // form submit handler
+    document.getElementById('applicationForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      // gather data
+      const surname = document.getElementById('surname').value.trim();
+      const given_name = document.getElementById('given_name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!surname || !given_name || !email) { alert('Surname, Given Name and Email are required.'); return; }
+      // check duplicate email
+      if(members.some(m => m.email.toLowerCase() === email.toLowerCase())) { alert('An application with this email already exists. Use a different email or contact admin.'); return; }
+      const membershipNewRenewal = document.querySelector('input[name="membership_new_renewal"]:checked')?.value;
+      const membershipTypeElem = document.querySelector('input[name="membership_type"]:checked');
+      const membership_type = membershipTypeElem ? membershipTypeElem.value : '';
+      const newMember = {
+        id: getNextId(),
+        surname, given_name,
+        institution: document.getElementById('institution').value,
+        dob: document.getElementById('dob').value,
+        sex: document.getElementById('sex').value,
+        marital_status: document.getElementById('marital_status').value,
+        home_province: document.getElementById('home_province').value,
+        country: document.getElementById('country').value,
+        denomination: document.getElementById('denomination').value,
+        address: document.getElementById('address').value,
+        phone: document.getElementById('phone').value,
+        mobile: document.getElementById('mobile').value,
+        email,
+        college_university: document.getElementById('college_university').value,
+        member_role: document.getElementById('member_role').value,
+        year_of_graduation: document.getElementById('year_of_graduation').value,
+        field_of_study: document.getElementById('field_of_study').value,
+        graduate_program: document.getElementById('graduate_program').value,
+        fortnightly_amount: document.getElementById('fortnightly_amount').value,
+        monthly_amount: document.getElementById('monthly_amount').value,
+        yearly_amount: document.getElementById('yearly_amount').value,
+        donation_amount: document.getElementById('donation_amount').value,
+        membership_type: membership_type,
+        membership_amount: document.getElementById('membership_amount').value,
+        membership_new_renewal: membershipNewRenewal,
+        membership_number: document.getElementById('membership_number')?.value || '',
+        application_status: 'pending',
+        created_at: new Date().toISOString()
+      };
+      members.unshift(newMember);
+      saveMembers();
+      showToast('✅ Application submitted successfully!', 'success');
+      document.getElementById('applicationForm').reset();
+      document.getElementById('country').value = 'Papua New Guinea';
+      // reset radio defaults
+      document.querySelector('input[name="membership_new_renewal"][value="New"]').checked = true;
+      document.getElementById('renewalNumberContainer').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // renewal number field toggle
+    const renewalRadios = document.querySelectorAll('input[name="membership_new_renewal"]');
+    const renewalDiv = document.getElementById('renewalNumberContainer');
+    function toggleRenewalField() {
+      const selected = document.querySelector('input[name="membership_new_renewal"]:checked')?.value;
+      if(selected === 'Renewal') renewalDiv.classList.remove('hidden');
+      else renewalDiv.classList.add('hidden');
+    }
+    renewalRadios.forEach(r => r.addEventListener('change', toggleRenewalField));
+    toggleRenewalField();
+
+    // Admin toggle visibility
+    const adminBtn = document.getElementById('adminToggleBtn');
+    const adminPanelDiv = document.getElementById('adminPanel');
+    adminBtn.addEventListener('click', () => {
+      if(adminPanelDiv.classList.contains('hidden')) {
+        adminPanelDiv.classList.remove('hidden');
+        adminBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i> Hide Admin Panel';
+      } else {
+        adminPanelDiv.classList.add('hidden');
+        adminBtn.innerHTML = '<i class="fas fa-lock mr-2"></i> Show Admin Panel (demo)';
+      }
+    });
+
+    // Initialize
+    loadMembersFromStorage();
+  </script>
+</body>
+</html>
