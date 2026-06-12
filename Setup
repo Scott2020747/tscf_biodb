@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSCF Vision Partners - Windows Setup Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #1a2c3e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1a4a6e 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-top: 16px;
+        }
+
+        /* Card styles */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            color: #0f2b3d;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #f4a261;
+            display: inline-block;
+        }
+
+        .card h3 {
+            color: #1a4a6e;
+            font-size: 1.3rem;
+            margin: 20px 0 12px 0;
+        }
+
+        .card h4 {
+            color: #2d6a4f;
+            font-size: 1.1rem;
+            margin: 16px 0 8px 0;
+        }
+
+        /* Code blocks */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 16px 0;
+            line-height: 1.5;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #d14;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 12px 0 12px 24px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        /* Steps */
+        .step {
+            background: #f8fafc;
+            border-left: 4px solid #f4a261;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 12px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #f4a261;
+            color: white;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        /* Alert boxes */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            color: #065f46;
+        }
+
+        .alert-warning {
+            background: #fed7aa;
+            border-left: 4px solid #f97316;
+            color: #7c2d12;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            color: #1e3a8a;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        /* Badge for OS */
+        .os-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2d3748;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            background: #0f2b3d;
+            color: white;
+            border-radius: 20px;
+            margin-top: 32px;
+        }
+
+        .footer a {
+            color: #f4a261;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin: 24px 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .card {
+                padding: 20px;
+            }
+            pre {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+        }
+
+        .toc ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin: 0;
+        }
+
+        .toc a {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #1a4a6e;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            background: #f4a261;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📘 TSCF Vision Partners</h1>
+            <p>Complete Windows Setup Guide for New Developers</p>
+            <div class="badge">🎯 Follow these steps to get the project running on your Windows laptop</div>
+        </div>
+
+        <!-- OS Badge -->
+        <div class="os-badge">
+            🪟 Windows 10 / 11 | 💻 Visual Studio Code | 🐘 PostgreSQL | 📦 Node.js
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>📑 Quick Navigation</h3>
+            <ul>
+                <li><a href="#prerequisites">1. Prerequisites</a></li>
+                <li><a href="#clone">2. Clone Repository</a></li>
+                <li><a href="#database">3. Database Setup</a></li>
+                <li><a href="#backend">4. Backend Setup</a></li>
+                <li><a href="#frontend">5. Frontend Setup</a></li>
+                <li><a href="#git-workflow">6. Git Workflow</a></li>
+                <li><a href="#troubleshooting">7. Troubleshooting</a></li>
+                <li><a href="#shortcuts">8. VS Code Shortcuts</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 1: Prerequisites -->
+        <div class="card" id="prerequisites">
+            <h2>📋 1. Prerequisites</h2>
+            <p>Before starting, ensure you have the following installed on your Windows laptop:</p>
+
+            <h3>🔧 1.1 Install Node.js and npm</h3>
+            <ul>
+                <li>Download from: <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a> (Download LTS version)</li>
+                <li>Run the installer and follow the installation wizard</li>
+                <li>Verify installation: Open <strong>Command Prompt</strong> or <strong>PowerShell</strong> and type:</li>
+            </ul>
+            <pre><code>node --version
+npm --version</code></pre>
+
+            <h3>🐘 1.2 Install PostgreSQL</h3>
+            <ul>
+                <li>Download from: <a href="https://www.postgresql.org/download/windows/" target="_blank">https://www.postgresql.org/download/windows/</a></li>
+                <li>Choose version 14 or higher</li>
+                <li>During installation:
+                    <ul>
+                        <li><strong>Remember the password</strong> you set for the <code>postgres</code> user (e.g., <code>postgres123</code>)</li>
+                        <li>Keep default port: <code>5432</code></li>
+                        <li>Install pgAdmin (comes bundled)</li>
+                    </ul>
+                </li>
+                <li>Verify installation: Search for "pgAdmin 4" in Windows Start menu</li>
+            </ul>
+
+            <h3>📦 1.3 Install Git</h3>
+            <ul>
+                <li>Download from: <a href="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a></li>
+                <li>Run installer (default settings are fine)</li>
+                <li>Verify installation:</li>
+            </ul>
+            <pre><code>git --version</code></pre>
+
+            <h3>💻 1.4 Install Visual Studio Code</h3>
+            <ul>
+                <li>Download from: <a href="https://code.visualstudio.com/download" target="_blank">https://code.visualstudio.com/download</a></li>
+                <li>Install and launch VS Code</li>
+            </ul>
+        </div>
+
+        <!-- Section 2: Clone Repository -->
+        <div class="card" id="clone">
+            <h2>🚀 2. Clone the Repository</h2>
+            <div class="step">
+                <span class="step-number">1</span> Open <strong>VS Code</strong>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span> Press <code>Ctrl + Shift + P</code> to open command palette
+            </div>
+            <div class="step">
+                <span class="step-number">3</span> Type <code>Git: Clone</code> and press Enter
+            </div>
+            <div class="step">
+                <span class="step-number">4</span> Enter the repository URL:
+                <pre><code>https://github.com/YOUR_USERNAME/tscf-vision-partners.git</code></pre>
+            </div>
+            <div class="step">
+                <span class="step-number">5</span> Choose a folder on your computer (e.g., <code>C:\Projects\</code>)
+            </div>
+            <div class="step">
+                <span class="step-number">6</span> When prompted, click "Open" to open the cloned repository
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 Alternative using Command Prompt:</strong>
+                <pre><code>cd C:\Projects
+git clone https://github.com/YOUR_USERNAME/tscf-vision-partners.git
+cd tscf-vision-partners
+code .</code></pre>
+            </div>
+        </div>
+
+        <!-- Section 3: Database Setup -->
+        <div class="card" id="database">
+            <h2>🐘 3. Set Up PostgreSQL Database</h2>
+
+            <h3>📀 3.1 Create Database using pgAdmin</h3>
+            <ol>
+                <li>Open <strong>pgAdmin 4</strong> from Windows Start menu</li>
+                <li>Click on "Servers" → "PostgreSQL" → Enter your password</li>
+                <li>Right-click on "Databases" → "Create" → "Database"</li>
+                <li>Name the database: <code>tscf_db</code></li>
+                <li>Click "Save"</li>
+            </ol>
+
+            <h3>📝 3.2 Create Database Tables</h3>
+            <ol>
+                <li>In VS Code, open the <code>database.sql</code> file</li>
+                <li>Select all content (<code>Ctrl + A</code>)</li>
+                <li>Copy (<code>Ctrl + C</code>)</li>
+                <li>Open pgAdmin 4</li>
+                <li>Click on <code>tscf_db</code> database</li>
+                <li>Click on "Query Tool" (puzzle icon or Tools → Query Tool)</li>
+                <li>Paste the SQL code (<code>Ctrl + V</code>)</li>
+                <li>Press <code>F5</code> or click "Execute" (lightning bolt icon)</li>
+            </ol>
+
+            <div class="alert alert-success">
+                <strong>✅ Expected output:</strong> <code>CREATE TABLE</code> and <code>CREATE INDEX</code> messages
+            </div>
+
+            <h3>⚙️ 3.3 Alternative using Command Line</h3>
+            <pre><code>psql -U postgres
+# Enter your password when prompted
+# Then run:
+CREATE DATABASE tscf_db;
+\q</code></pre>
+        </div>
+
+        <!-- Section 4: Backend Setup -->
+        <div class="card" id="backend">
+            <h2>⚙️ 4. Backend Configuration & Setup</h2>
+
+            <h3>📄 4.1 Configure Environment Variables</h3>
+            <ol>
+                <li>In VS Code, navigate to the <code>backend</code> folder</li>
+                <li>Create a new file called <code>.env</code></li>
+                <li>Add the following content (replace password with yours - I will provide the password):</li>
+            </ol>
+            <pre><code>DB_USER=postgres
+DB_PASSWORD=postgres123
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=tscf_db
+PORT=5000</code></pre>
+
+            <h3>📦 4.2 Install Backend Dependencies</h3>
+            <ol>
+                <li>Open VS Code terminal: <code>Terminal</code> → <code>New Terminal</code></li>
+                <li>Navigate to backend folder:</li>
+            </ol>
+            <pre><code>cd backend</code></pre>
+            <ol start="3">
+                <li>Install dependencies:</li>
+            </ol>
+            <pre><code>npm install</code></pre>
+
+            <h3>▶️ 4.3 Start the Backend Server</h3>
+            <pre><code>npm run dev</code></pre>
+            <div class="alert alert-success">
+                <strong>✅ You should see:</strong><br>
+                <code>✅ Database connected successfully<br>Server running on port 5000</code>
+            </div>
+            <div class="alert alert-warning">
+                <strong>⚠️ Important:</strong> Keep this terminal running! Don't close it.
+            </div>
+        </div>
+
+        <!-- Section 5: Frontend Setup -->
+        <div class="card" id="frontend">
+            <h2>🎨 5. Frontend Setup</h2>
+
+            <h3>📦 5.1 Install Frontend Dependencies</h3>
+            <ol>
+                <li>Open a <strong>new terminal</strong> in VS Code (<code>Ctrl + Shift + `</code>)</li>
+                <li>Navigate to frontend folder:</li>
+            </ol>
+            <pre><code>cd frontend</code></pre>
+            <ol start="3">
+                <li>Install dependencies:</li>
+            </ol>
+            <pre><code>npm install</code></pre>
+
+            <h3>▶️ 5.2 Start the Frontend Application</h3>
+            <pre><code>npm start</code></pre>
+            <div class="alert alert-success">
+                <strong>✅ The application will automatically open in your browser at:</strong> <code>http://localhost:3000</code>
+            </div>
+
+            <h3>🧪 5.3 Test the Application</h3>
+            <ol>
+                <li>Fill out the membership form</li>
+                <li>Click "Submit Application"</li>
+                <li>Click "Show Admin Panel" to see your submission</li>
+                <li>Test approve/reject/delete functions</li>
+            </ol>
+        </div>
+
+        <!-- Section 6: Git Workflow -->
+        <div class="card" id="git-workflow">
+            <h2>📝 6. Working with Git & GitHub</h2>
+
+            <h3>🔄 Basic Git Workflow</h3>
+
+            <h4>Pull latest changes from GitHub (do this before starting work):</h4>
+            <pre><code>git pull origin main</code></pre>
+
+            <h4>Check what files have changed:</h4>
+            <pre><code>git status</code></pre>
+
+            <h4>Add your changes:</h4>
+            <pre><code># Add specific file
+git add backend/server.js
+
+# Add all changes
+git add .</code></pre>
+
+            <h4>Commit your changes (save locally):</h4>
+            <pre><code>git commit -m "type: description of changes"</code></pre>
+
+            <h4>Push to GitHub:</h4>
+            <pre><code>git push origin main</code></pre>
+
+            <h3>📝 Commit Message Guidelines</h3>
+            <table>
+                <thead>
+                    <tr><th>Prefix</th><th>Meaning</th><th>Example</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>feat:</code></td><td>New feature</td><td><code>feat: added email validation to form</code></td></tr>
+                    <tr><td><code>fix:</code></td><td>Bug fix</td><td><code>fix: resolved database connection error</code></td></tr>
+                    <tr><td><code>docs:</code></td><td>Documentation changes</td><td><code>docs: updated README with setup instructions</code></td></tr>
+                    <tr><td><code>style:</code></td><td>Code style changes</td><td><code>style: formatted code with prettier</code></td></tr>
+                    <tr><td><code>refactor:</code></td><td>Code restructuring</td><td><code>refactor: simplified database queries</code></td></tr>
+                    <tr><td><code>test:</code></td><td>Adding tests</td><td><code>test: added unit tests for API</code></td></tr>
+                    <tr><td><code>chore:</code></td><td>Maintenance tasks</td><td><code>chore: updated dependencies</code></td></tr>
+                </tbody>
+            </table>
+
+            <h3>⚠️ Resolving Merge Conflicts</h3>
+            <ol>
+                <li>VS Code will show files with conflicts</li>
+                <li>Look for <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers</li>
+                <li>Choose which changes to keep or edit manually</li>
+                <li>Save the file</li>
+                <li>Run:</li>
+            </ol>
+            <pre><code>git add .
+git commit -m "resolved merge conflict"
+git push</code></pre>
+        </div>
+
+        <!-- Section 7: Troubleshooting -->
+        <div class="card" id="troubleshooting">
+            <h2>🛠️ 7. Common Issues & Solutions</h2>
+
+            <div class="alert alert-warning">
+                <strong>❌ Issue 1:</strong> "Can't find module" errors<br>
+                <strong>✅ Solution:</strong> Reinstall dependencies
+                <pre><code>cd backend
+rm -rf node_modules
+npm install</code></pre>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>❌ Issue 2:</strong> Port 3000 already in use<br>
+                <strong>✅ Solution:</strong> Kill the process using the port
+                <pre><code>netstat -ano | findstr :3000
+taskkill /PID 12345 /F</code></pre>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>❌ Issue 3:</strong> Database connection failed<br>
+                <strong>✅ Solution:</strong> Check PostgreSQL is running
+                <ol>
+                    <li>Open "Services" app in Windows</li>
+                    <li>Find "postgresql" service</li>
+                    <li>Make sure it's "Running"</li>
+                    <li>If not, right-click → Start</li>
+                </ol>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>❌ Issue 4:</strong> Password authentication failed<br>
+                <strong>✅ Solution:</strong> Update <code>.env</code> file with correct PostgreSQL password
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>❌ Issue 5:</strong> npm install is very slow<br>
+                <strong>✅ Solution:</strong> Use faster download mirror
+                <pre><code>npm install --registry=https://registry.npmmirror.com</code></pre>
+            </div>
+        </div>
+
+        <!-- Section 8: VS Code Shortcuts -->
+        <div class="card" id="shortcuts">
+            <h2>⌨️ 8. VS Code Shortcuts & Tips</h2>
+
+            <h3>Essential Shortcuts</h3>
+            <table>
+                <thead><tr><th>Action</th><th>Windows Shortcut</th></tr></thead>
+                <tbody>
+                    <tr><td>Open terminal</td><td><code>Ctrl + `</code></td></tr>
+                    <tr><td>Search files</td><td><code>Ctrl + P</code></td></tr>
+                    <tr><td>Save file</td><td><code>Ctrl + S</code></td></tr>
+                    <tr><td>Find in file</td><td><code>Ctrl + F</code></td></tr>
+                    <tr><td>Find in project</td><td><code>Ctrl + Shift + F</code></td></tr>
+                    <tr><td>Open command palette</td><td><code>Ctrl + Shift + P</code></td></tr>
+                    <tr><td>Split terminal</td><td><code>Ctrl + Shift + 5</code></td></tr>
+                </tbody>
+            </table>
+
+            <h3>Recommended VS Code Extensions</h3>
+            <p>Install these from Extensions marketplace (<code>Ctrl + Shift + X</code>):</p>
+            <ul>
+                <li><strong>ES7+ React/Redux/React-Native snippets</strong> - React code shortcuts</li>
+                <li><strong>Prettier</strong> - Code formatter</li>
+                <li><strong>GitLens</strong> - Better Git integration</li>
+                <li><strong>PostgreSQL</strong> - SQL syntax highlighting</li>
+                <li><strong>Tailwind CSS IntelliSense</strong> - CSS suggestions</li>
+            </ul>
+        </div>
+
+        <!-- Section 9: Daily Workflow -->
+        <div class="card">
+            <h2>🔄 Daily Development Workflow</h2>
+            <pre><code># 1. Start your day - get latest changes
+git pull origin main
+
+# 2. Start backend (in one terminal)
+cd backend
+npm run dev
+
+# 3. Start frontend (in another terminal)
+cd frontend
+npm start
+
+# 4. Make your changes in VS Code
+
+# 5. Test your changes in browser (http://localhost:3000)
+
+# 6. Commit your work
+git add .
+git commit -m "type: description of changes"
+
+# 7. Push to GitHub
+git push origin main
+
+# 8. Stop servers when done (Ctrl + C in each terminal)</code></pre>
+        </div>
+
+        <!-- Section 10: Project Structure -->
+        <div class="card">
+            <h2>📂 Project Structure to Understand</h2>
+            <pre><code>tscf-vision-partners/
+│
+├── backend/                 # Server-side code
+│   ├── server.js           # Main Express server
+│   ├── db.js               # Database connection
+│   ├── .env                # Environment variables (your secrets)
+│   └── package.json        # Backend dependencies
+│
+├── frontend/                # Client-side React app
+│   ├── src/
+│   │   ├── App.js          # Main React component (where you'll edit most)
+│   │   ├── index.js        # React entry point
+│   │   └── index.css       # Global styles
+│   ├── public/             # Static files
+│   └── package.json        # Frontend dependencies
+│
+├── database.sql            # Database schema (run once)
+└── README.md               # Project documentation</code></pre>
+
+            <h3>Where to Make Changes</h3>
+            <table>
+                <thead><tr><th>What to change</th><th>Which file</th></tr></thead>
+                <tbody>
+                    <tr><td>Form fields, layout</td><td><code>frontend/src/App.js</code></td></tr>
+                    <tr><td>Colors, styling</td><td><code>frontend/src/App.js</code></td></tr>
+                    <tr><td>API endpoints</td><td><code>backend/server.js</code></td></tr>
+                    <tr><td>Database queries</td><td><code>backend/server.js</code></td></tr>
+                    <tr><td>Environment variables</td><td><code>backend/.env</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Checklist -->
+        <div class="card">
+            <h2>✅ Checklist Before First Run</h2>
+            <ul>
+                <li>☐ Node.js installed (<code>node --version</code> works)</li>
+                <li>☐ PostgreSQL installed and running</li>
+                <li>☐ Database <code>tscf_db</code> created</li>
+                <li>☐ Database tables created (ran database.sql)</li>
+                <li>☐ <code>.env</code> file created in backend folder</li>
+                <li>☐ <code>npm install</code> ran in both backend and frontend</li>
+                <li>☐ Backend running on port 5000</li>
+                <li>☐ Frontend running on port 3000</li>
+                <li>☐ Can submit form and see data in admin panel</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>📞 Need Help? Take a screenshot of the error and share it with me.</p>
+            <p>Happy coding! 🎉</p>
+            <hr style="background: rgba(255,255,255,0.2); margin: 20px 0;">
+            <p style="font-size: 0.85rem;">&copy; Tertiary Students Christian Fellowship 2026</p>
+        </div>
+    </div>
+</body>
+</html>
