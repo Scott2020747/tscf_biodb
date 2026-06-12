@@ -2,419 +2,380 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>TSCF Vision Partners | Tertiary Students Christian Fellowship</title>
-  <!-- Google Fonts & Tailwind CSS CDN -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSCF Vision Partners - Technical Documentation</title>
+  <!-- Tailwind CSS + Font Awesome + Inter Font -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Custom overrides / additional style for better cards & form elements -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <style>
-    /* smooth scroll behavior and custom focus rings */
-    html {
-      scroll-behavior: smooth;
+    * {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
     body {
-      background: linear-gradient(145deg, #eef2ff 0%, #e0e7ff 100%);
+      background: #f8fafc;
     }
-    .card-hover {
+    .doc-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.375rem;
+      font-size: 0.85rem;
+      color: #0f172a;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 0.75rem;
+      border: 1px solid #e2e8f0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #f1f5f9;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+    .anchor-heading {
+      scroll-margin-top: 80px;
+    }
+    .sidebar-link {
       transition: all 0.2s ease;
+      font-size: 0.85rem;
     }
-    .card-hover:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+    .sidebar-link:hover {
+      color: #4f46e5;
+      padding-left: 0.25rem;
     }
-    input, select, textarea {
-      transition: all 0.2s;
-    }
-    input:focus, select:focus, textarea:focus {
-      ring: 2px solid #3b82f6;
-      border-color: #3b82f6;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-    }
-    .radio-card {
-      transition: all 0.2s;
-    }
-    .radio-card:hover {
-      border-color: #6366f1;
-      background-color: #f5f3ff;
-    }
-    .form-section {
-      animation: fadeSlideUp 0.5s ease-out forwards;
-    }
-    @keyframes fadeSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
       }
     }
-    .admin-toggle {
-      transition: 0.2s;
-    }
-    .status-badge {
+    .badge-new {
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
       font-weight: 500;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
     }
   </style>
 </head>
-<body class="font-sans antialiased">
+<body class="antialiased">
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
-    <!-- Entire application container with white background & rounded shadow -->
-    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-      
-      <!-- ================= HEADER SECTION ================= -->
-      <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-800 text-white px-6 py-8 md:px-10 md:py-10">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-          <!-- Logo + TSCF title -->
-          <div class="flex items-center gap-4 flex-wrap justify-center md:justify-start">
-            <div class="bg-white/20 backdrop-blur-sm rounded-full p-3 shadow-lg">
-              <div class="w-14 h-14 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full flex items-center justify-center shadow-md">
-                <span class="text-white font-black text-2xl tracking-tight">TSCF</span>
-              </div>
+  <!-- header with gradient -->
+  <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-800 text-white shadow-lg">
+    <div class="doc-container px-6 py-8 md:py-10">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="bg-white/20 backdrop-blur rounded-xl p-2">
+              <span class="text-2xl font-black">📘</span>
             </div>
-            <div class="text-center md:text-left">
-              <h1 class="text-xl md:text-3xl font-extrabold tracking-tight">TERTIARY STUDENTS CHRISTIAN FELLOWSHIP</h1>
-              <p class="text-sm text-indigo-100 mt-1">National Membership: P. O. Box 6329 Port Boroko, National Capital District</p>
-              <p class="text-sm text-indigo-100"><i class="fas fa-mobile-alt mr-1"></i> Mobile: 73277901</p>
-            </div>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md rounded-xl px-6 py-3 text-center border border-white/20">
-            <div class="text-xs uppercase tracking-wide">The Voice of Truth</div>
-            <div class="text-2xl font-bold italic">SALT & LIGHT</div>
-          </div>
-        </div>
-
-        <!-- Vision / Mission / Values row (responsive grid) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pt-2 border-t border-white/20">
-          <div class="text-center p-3">
-            <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2"><i class="fas fa-lightbulb text-2xl"></i></div>
-            <h3 class="font-bold text-lg">Our Vision</h3>
-            <p class="text-sm text-indigo-100">To mobilize and facilitate the movement of graduates to impact the marketplace and the nation towards national salvation and transformation</p>
-          </div>
-          <div class="text-center p-3 border-l-0 md:border-l border-r-0 md:border-r border-white/20">
-            <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2"><i class="fas fa-users text-2xl"></i></div>
-            <h3 class="font-bold text-lg">Our Mission</h3>
-            <p class="text-sm text-indigo-100">Promoting a kingdom mindset through divine alignment, strategic alliance, partnership and fellowship amongst all graduates to become gatekeepers in our nation.</p>
-          </div>
-          <div class="text-center p-3">
-            <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2"><i class="fas fa-hand-holding-heart text-2xl"></i></div>
-            <h3 class="font-bold text-lg">Core Values</h3>
-            <p class="text-sm text-indigo-100">Truth (God's Word), Servant Leadership, Integrity, Teamwork, Empowerment, Partnership and Advocacy</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- main title "TSCF VISION PARTNERS FORM 2026" -->
-      <div class="text-center pt-8 pb-3">
-        <h2 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-indigo-700 to-purple-700 bg-clip-text text-transparent">TSCF VISION PARTNERS FORM 2026</h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mt-3 rounded-full"></div>
-      </div>
-
-      <!-- ================= FORM ================= -->
-      <form id="applicationForm" class="px-6 md:px-12 py-6 space-y-10">
-        <!-- Section 1: GENERAL INFORMATION -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
-          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</span>
-            <h3 class="text-xl font-bold text-gray-800">GENERAL INFORMATION</h3>
-          </div>
-          <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Surname *</label><input type="text" name="surname" id="surname" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-400" required></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Given Name *</label><input type="text" name="given_name" id="given_name" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-400" required></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Institution</label><input type="text" name="institution" id="institution" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Date of Birth</label><input type="date" name="dob" id="dob" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Sex</label><select name="sex" id="sex" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 bg-white"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Marital Status</label><select name="marital_status" id="marital_status" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"><option value="">Select</option><option>Married</option><option>Single</option><option>Divorced</option><option>Other</option></select></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Home Province</label><input type="text" name="home_province" id="home_province" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Country</label><input type="text" name="country" id="country" value="Papua New Guinea" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Denomination</label><input type="text" name="denomination" id="denomination" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div class="md:col-span-2 lg:col-span-3"><label class="block text-sm font-semibold text-gray-700 mb-1">Address</label><textarea name="address" id="address" rows="2" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></textarea></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1"><i class="fas fa-phone-alt mr-1"></i> Phone</label><input type="text" name="phone" id="phone" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1"><i class="fas fa-mobile-alt mr-1"></i> Mobile</label><input type="text" name="mobile" id="mobile" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1"><i class="far fa-envelope mr-1"></i> Email *</label><input type="email" name="email" id="email" class="w-full border border-gray-300 rounded-lg px-4 py-2.5" required></div>
-          </div>
-        </div>
-
-        <!-- Section 2: EDUCATIONAL INFORMATION -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
-          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</span>
-            <h3 class="text-xl font-bold text-gray-800">EDUCATIONAL INFORMATION</h3>
-          </div>
-          <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div class="md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">College / University attended</label><input type="text" name="college_university" id="college_university" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">As a member / Leader</label><input type="text" name="member_role" id="member_role" placeholder="Member / Leader / Other" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Year of Graduation</label><input type="number" name="year_of_graduation" id="year_of_graduation" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-            <div class="md:col-span-2"><label class="block text-sm font-semibold text-gray-700 mb-1">Field of Study</label><input type="text" name="field_of_study" id="field_of_study" class="w-full border border-gray-300 rounded-lg px-4 py-2.5"></div>
-          </div>
-        </div>
-
-        <!-- Section 3: PARTNERS PROGRAMS + banking -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
-          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</span>
-            <h3 class="text-xl font-bold text-gray-800">PARTNERS PROGRAMS</h3>
-          </div>
-          <div class="p-6 space-y-6">
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Graduate Programs (select one)</label>
-              <select name="graduate_program" id="graduate_program" class="w-full md:w-2/3 border border-gray-300 rounded-lg px-4 py-2.5 bg-white">
-                <option value="">-- Choose a program --</option>
-                <option>Moore Bible College</option><option>Queensland Theological Seminary</option><option>Ministry Apprentice (MA)</option>
-                <option>SAIACS - India</option><option>Corporate Training</option><option>Ministry Training Program</option>
-                <option>Seminars</option><option>Conferences</option><option>Empowerment Training</option>
-              </select>
-            </div>
-
-            <!-- Donation row -->
-            <div class="bg-indigo-50 rounded-xl p-5">
-              <p class="font-bold text-gray-800 mb-3 flex items-center gap-2"><i class="fas fa-donate text-indigo-600"></i> Donation Amounts (Kina)</p>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div><label class="text-xs text-gray-600">Fortnightly (K)</label><input type="number" step="0.01" name="fortnightly_amount" id="fortnightly_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
-                <div><label class="text-xs text-gray-600">Monthly (K)</label><input type="number" step="0.01" name="monthly_amount" id="monthly_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
-                <div><label class="text-xs text-gray-600">Yearly (K)</label><input type="number" step="0.01" name="yearly_amount" id="yearly_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
-                <div><label class="text-xs text-gray-600">One-time Donation</label><input type="number" step="0.01" name="donation_amount" id="donation_amount" placeholder="0.00" class="w-full border rounded-lg px-3 py-2"></div>
-              </div>
-            </div>
-
-            <!-- Banking details card like the image -->
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center md:text-left">
-              <h4 class="font-bold text-blue-900 flex items-center gap-2 justify-center md:justify-start"><i class="fas fa-university"></i> TSCF Banking details</h4>
-              <p class="font-mono text-sm mt-2">Tertiary Students Christian Fellowship<br>1000435676 | Bank South Pacific | Boroko Banking Centre<br>BSB NO: 088-943 | SWIFT CODE: BOSPPGPM</p>
+              <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">TSCF Vision Partners</h1>
+              <p class="text-indigo-100 text-sm mt-1">Technical Documentation · Full-Stack Application</p>
             </div>
           </div>
         </div>
-
-        <!-- Section 4: TYPE OF MEMBERSHIP -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-md card-hover overflow-hidden form-section">
-          <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
-            <span class="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-sm">4</span>
-            <h3 class="text-xl font-bold text-gray-800">TYPE OF MEMBERSHIP</h3>
-          </div>
-          <div class="p-6 space-y-6">
-            <div class="flex flex-wrap gap-6 items-center">
-              <label class="flex items-center gap-2"><input type="radio" name="membership_new_renewal" value="New" checked> <span class="font-medium">New Application</span></label>
-              <label class="flex items-center gap-2"><input type="radio" name="membership_new_renewal" value="Renewal"> <span class="font-medium">Renewal</span></label>
-              <div id="renewalNumberContainer" class="hidden"><label class="text-sm text-gray-600 ml-2">Membership No.:</label><input type="text" name="membership_number" id="membership_number" placeholder="TSCF-XXXX" class="ml-2 border rounded-md px-3 py-1.5 w-36"></div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card hover:bg-gray-50"><input type="radio" name="membership_type" value="Student Member"> <div><span class="font-bold">Student Member</span><br><span class="text-sm text-gray-500">K20/year</span></div></label>
-              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card"><input type="radio" name="membership_type" value="Graduate Member"> <div><span class="font-bold">Graduate Member</span><br><span class="text-sm text-gray-500">K200/year</span></div></label>
-              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card"><input type="radio" name="membership_type" value="Life Member"> <div><span class="font-bold">Life Member</span><br><span class="text-sm text-gray-500">K2500 one-off</span></div></label>
-              <label class="border-2 rounded-xl p-3 flex items-center gap-3 cursor-pointer radio-card"><input type="radio" name="membership_type" value="Partner"> <div><span class="font-bold">Partner</span><br><span class="text-sm text-gray-500">Open amount</span></div></label>
-            </div>
-            <div><label class="block text-sm font-semibold text-gray-700 mb-1">Custom Amount (Kina)</label><input type="number" step="0.01" name="membership_amount" id="membership_amount" placeholder="Enter custom amount" class="w-48 border rounded-lg px-4 py-2"></div>
-          </div>
-        </div>
-
-        <!-- Submit button -->
-        <div class="text-center pb-4">
-          <button type="submit" id="submitBtn" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-3 px-12 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"><i class="fas fa-paper-plane mr-2"></i> Submit Application</button>
-        </div>
-      </form>
-
-      <!-- ================ ADMIN PANEL TOGGLE (client-side mock display + localstorage demo) ================ -->
-      <div class="px-6 md:px-12 pb-4">
-        <div class="text-center mt-4">
-          <button id="adminToggleBtn" class="bg-gray-800 text-white px-5 py-2 rounded-lg text-sm hover:bg-gray-900 transition"><i class="fas fa-lock mr-2"></i> Show Admin Panel (demo)</button>
-        </div>
-        <div id="adminPanel" class="hidden mt-6 bg-gray-50 rounded-2xl border border-gray-200 p-6 overflow-x-auto">
-          <h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fas fa-chalkboard-user"></i> Admin Dashboard — Recent Submissions</h3>
-          <div class="text-sm text-gray-500 mb-3"><i class="fas fa-info-circle"></i> Demo mode: submissions stored in browser localStorage. Approve/Reject/Delete works locally.</div>
-          <table class="min-w-full bg-white rounded-xl shadow-sm" id="adminTable">
-            <thead class="bg-gray-100 border-b">
-              <tr><th class="p-3 text-left">ID</th><th class="p-3 text-left">Full Name</th><th class="p-3 text-left">Email</th><th class="p-3 text-left">Membership</th><th class="p-3 text-left">Status</th><th class="p-3 text-left">Actions</th></tr>
-            </thead>
-            <tbody id="adminTableBody"></tbody>
-          </table>
+        <div class="flex gap-2">
+          <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-mono">v1.0.0</span>
+          <span class="bg-emerald-500/30 px-3 py-1 rounded-full text-xs">Production Ready</span>
         </div>
       </div>
-
-      <!-- FOOTER -->
-      <div class="bg-gray-900 text-white mt-10 py-8 text-center border-t border-gray-800">
-        <div class="flex justify-center mb-3">
-          <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg"><span class="text-white font-bold text-xl">TSCF</span></div>
-        </div>
-        <p class="text-xs opacity-80">TSCF Vision Partners Application Form 2026</p>
-        <p class="text-xs opacity-70 mt-1">&copy; Tertiary Students Christian Fellowship 2026. All rights reserved.</p>
-      </div>
+      <p class="text-indigo-100/90 mt-4 max-w-3xl text-sm border-l-4 border-indigo-400 pl-4">The complete system documentation for the Tertiary Students Christian Fellowship membership platform — PERN stack with React, Tailwind CSS, PostgreSQL.</p>
     </div>
   </div>
 
-  <script>
-    // ------------------------- CLIENT SIDE DATABASE (localStorage simulation for demo, but complete functionality)
-    // Load members from localStorage or initialize sample data
-    let members = [];
+  <div class="doc-container px-6 py-8 flex gap-8 relative">
+    <!-- Sidebar navigation (sticky) -->
+    <aside class="sidebar w-64 shrink-0 sticky top-6 h-fit bg-white rounded-2xl shadow-sm border border-gray-200 p-4 hidden md:block">
+      <div class="font-bold text-gray-800 text-sm mb-4 flex items-center gap-2"><i class="fas fa-list-ul text-indigo-500"></i> Contents</div>
+      <nav class="space-y-2 text-gray-600">
+        <a href="#overview" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-info-circle w-4 mr-2 text-gray-400"></i>Project Overview</a>
+        <a href="#tech-stack" class="sidebar-link block hover:text-indigo-600 mt-2"><i class="fas fa-layer-group mr-2 w-4 text-gray-400"></i>Technology Stack</a>
+        <a href="#structure" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-folder-tree mr-2 w-4 text-gray-400"></i>Project Structure</a>
+        <a href="#installation" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-download mr-2 w-4 text-gray-400"></i>Installation Guide</a>
+        <a href="#api" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-code mr-2 w-4 text-gray-400"></i>API Documentation</a>
+        <a href="#database" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-database mr-2 w-4 text-gray-400"></i>Database Schema</a>
+        <a href="#env" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-key mr-2 w-4 text-gray-400"></i>Environment Variables</a>
+        <a href="#workflow" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-code-branch mr-2 w-4 text-gray-400"></i>Dev Workflow</a>
+        <a href="#deployment" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-cloud-upload-alt mr-2 w-4 text-gray-400"></i>Deployment</a>
+        <a href="#contributing" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-users mr-2 w-4 text-gray-400"></i>Contributing</a>
+        <a href="#troubleshooting" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-bug mr-2 w-4 text-gray-400"></i>Troubleshooting</a>
+        <a href="#future" class="sidebar-link block hover:text-indigo-600"><i class="fas fa-rocket mr-2 w-4 text-gray-400"></i>Future Enhancements</a>
+      </nav>
+      <div class="mt-6 pt-4 border-t border-gray-100 text-xs text-gray-400">
+        <i class="fas fa-book-open mr-1"></i> Last updated: Jan 2026
+      </div>
+    </aside>
 
-    function loadMembersFromStorage() {
-      const stored = localStorage.getItem('tscf_members');
-      if(stored) {
-        members = JSON.parse(stored);
-      } else {
-        // sample placeholder data
-        members = [];
-        localStorage.setItem('tscf_members', JSON.stringify(members));
-      }
-      renderAdminTable();
-    }
+    <!-- Main content -->
+    <main class="flex-1 space-y-12">
+      
+      <!-- Overview -->
+      <section id="overview" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <div class="flex items-center gap-3 border-b border-gray-100 pb-4 mb-5">
+          <i class="fas fa-church text-3xl text-indigo-600"></i>
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Project Overview</h2>
+        </div>
+        <p class="text-gray-700 leading-relaxed">The <strong class="text-indigo-700">TSCF Vision Partners Application</strong> is a full-stack web application designed to manage membership applications for the Tertiary Students Christian Fellowship. The system allows prospective members to submit their bio-data, select membership types, make financial contributions, and enables administrators to manage and track applications efficiently.</p>
+        <div class="mt-5 bg-indigo-50 p-5 rounded-xl border-l-4 border-indigo-500">
+          <p class="text-sm text-indigo-900"><i class="fas fa-bullhorn mr-2"></i> <strong>Key features:</strong> Member registration, donation pledges, graduate programs selection, admin dashboard with status approval/rejection, real-time form validation, and responsive UI built with Tailwind CSS.</p>
+        </div>
+      </section>
 
-    function saveMembers() {
-      localStorage.setItem('tscf_members', JSON.stringify(members));
-      renderAdminTable();
-    }
+      <!-- Tech Stack -->
+      <section id="tech-stack" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2 mb-5"><i class="fas fa-microchip text-indigo-500"></i> Technology Stack</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="font-semibold text-lg flex items-center gap-2"><i class="fab fa-node-js text-green-600"></i> Backend</h3>
+            <div class="table-wrapper mt-3">
+              <table>
+                <thead><tr><th>Technology</th><th>Version</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td>Node.js</td><td>v18+</td><td>JavaScript runtime</td></tr>
+                  <tr><td>Express.js</td><td>4.18.2</td><td>REST API framework</td></tr>
+                  <tr><td>PostgreSQL</td><td>14+</td><td>Relational database</td></tr>
+                  <tr><td>pg</td><td>8.11.3</td><td>Postgres client</td></tr>
+                  <tr><td>cors / dotenv</td><td>latest</td><td>Security & env vars</td></tr>
+                  <tr><td>nodemon</td><td>3.0.1</td><td>Dev auto-restart</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg flex items-center gap-2"><i class="fab fa-react text-blue-500"></i> Frontend</h3>
+            <div class="table-wrapper mt-3">
+              <table>
+                <thead><tr><th>Technology</th><th>Version</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td>React</td><td>18.2.0</td><td>UI library</td></tr>
+                  <tr><td>Tailwind CSS</td><td>3.3.5</td><td>Styling framework</td></tr>
+                  <tr><td>Axios</td><td>1.5.0</td><td>HTTP client</td></tr>
+                  <tr><td>React Icons</td><td>4.11.0</td><td>Icon set</td></tr>
+                  <tr><td>React Hot Toast</td><td>2.4.1</td><td>Notifications</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+          <p class="text-sm font-mono text-gray-600"><i class="fas fa-share-alt mr-2"></i> Architecture: Client (React) ↔ REST API (Express) ↔ PostgreSQL</p>
+          <pre class="mt-3 text-xs"><code>┌─────────────┐     ┌──────────────┐     ┌────────────┐
+│ React App   │────▶│ Express API  │────▶│ PostgreSQL │
+│ (Port 3000) │     │ (Port 5000)  │     │  (5432)    │
+└─────────────┘     └──────────────┘     └────────────┘</code></pre>
+        </div>
+      </section>
 
-    function renderAdminTable() {
-      const tbody = document.getElementById('adminTableBody');
-      if(!tbody) return;
-      if(members.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center p-6 text-gray-400">No applications yet. Submit one to see here.</td></tr>';
-        return;
-      }
-      tbody.innerHTML = members.map(member => `
-        <tr class="border-b hover:bg-gray-50">
-          <td class="p-3">${member.id}</td>
-          <td class="p-3">${member.surname || ''}, ${member.given_name || ''}</td>
-          <td class="p-3">${member.email || ''}</td>
-          <td class="p-3">${member.membership_type || 'N/A'}</td>
-          <td class="p-3"><span class="status-badge ${member.application_status === 'approved' ? 'bg-green-100 text-green-700' : member.application_status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">${member.application_status || 'pending'}</span></td>
-          <td class="p-3 space-x-2">
-            <select data-id="${member.id}" class="status-select px-2 py-1 border rounded text-sm">
-              <option value="pending" ${member.application_status === 'pending' ? 'selected' : ''}>Pending</option>
-              <option value="approved" ${member.application_status === 'approved' ? 'selected' : ''}>Approved</option>
-              <option value="rejected" ${member.application_status === 'rejected' ? 'selected' : ''}>Rejected</option>
-            </select>
-            <button data-id="${member.id}" class="delete-member bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600"><i class="fas fa-trash-alt"></i></button>
-          </td>
-        </tr>
-      `).join('');
-      // attach dynamic events
-      document.querySelectorAll('.status-select').forEach(select => {
-        select.addEventListener('change', (e) => {
-          const id = parseInt(select.getAttribute('data-id'));
-          const newStatus = select.value;
-          const member = members.find(m => m.id === id);
-          if(member) { member.application_status = newStatus; saveMembers(); showToast(`Status updated to ${newStatus}`, 'success'); }
-        });
-      });
-      document.querySelectorAll('.delete-member').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const id = parseInt(btn.getAttribute('data-id'));
-          if(confirm('Delete this application permanently?')) {
-            members = members.filter(m => m.id !== id);
-            saveMembers();
-            showToast('Application deleted', 'info');
-          }
-        });
-      });
-    }
+      <!-- Project Structure -->
+      <section id="structure" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-folder-open text-amber-600"></i> Project Structure</h2>
+        <pre class="bg-gray-900 text-gray-200 p-5 rounded-xl text-sm"><code>tscf-vision-partners/
+├── backend/
+│   ├── server.js            # Main express app
+│   ├── db.js                # PostgreSQL connection pool
+│   ├── package.json
+│   └── .env                 # Environment secrets
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── App.js           # Main React component
+│   │   ├── index.js
+│   │   ├── index.css        # Tailwind directives
+│   │   └── tscf-logo.png
+│   ├── tailwind.config.js
+│   └── package.json
+├── database.sql             # DB schema + indexes
+└── README.md</code></pre>
+      </section>
 
-    function showToast(msg, type = 'success') {
-      let toastDiv = document.getElementById('dynamic-toast');
-      if(!toastDiv) {
-        toastDiv = document.createElement('div');
-        toastDiv.id = 'dynamic-toast';
-        toastDiv.className = 'fixed bottom-5 right-5 z-50 bg-gray-800 text-white px-5 py-3 rounded-lg shadow-xl text-sm transition-all duration-300 opacity-0';
-        document.body.appendChild(toastDiv);
-      }
-      toastDiv.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>${msg}`;
-      toastDiv.classList.remove('opacity-0');
-      toastDiv.classList.add('opacity-100');
-      setTimeout(() => {
-        toastDiv.classList.add('opacity-0');
-      }, 2800);
-    }
+      <!-- Installation Guide -->
+      <section id="installation" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-cogs text-emerald-600"></i> Installation Guide</h2>
+        <div class="space-y-4">
+          <div><i class="fas fa-check-circle text-green-500 mr-2"></i> <strong>Prerequisites:</strong> Node.js v18+, npm v9+, PostgreSQL v14+</div>
+          <pre><code># 1. Clone repo
+git clone https://github.com/your-username/tscf-vision-partners.git
+cd tscf-vision-partners
 
-    // generate new id
-    function getNextId() { return members.length > 0 ? Math.max(...members.map(m=>m.id)) + 1 : 1; }
+# 2. Setup PostgreSQL database
+psql -U postgres -f database.sql
 
-    // form submit handler
-    document.getElementById('applicationForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      // gather data
-      const surname = document.getElementById('surname').value.trim();
-      const given_name = document.getElementById('given_name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      if(!surname || !given_name || !email) { alert('Surname, Given Name and Email are required.'); return; }
-      // check duplicate email
-      if(members.some(m => m.email.toLowerCase() === email.toLowerCase())) { alert('An application with this email already exists. Use a different email or contact admin.'); return; }
-      const membershipNewRenewal = document.querySelector('input[name="membership_new_renewal"]:checked')?.value;
-      const membershipTypeElem = document.querySelector('input[name="membership_type"]:checked');
-      const membership_type = membershipTypeElem ? membershipTypeElem.value : '';
-      const newMember = {
-        id: getNextId(),
-        surname, given_name,
-        institution: document.getElementById('institution').value,
-        dob: document.getElementById('dob').value,
-        sex: document.getElementById('sex').value,
-        marital_status: document.getElementById('marital_status').value,
-        home_province: document.getElementById('home_province').value,
-        country: document.getElementById('country').value,
-        denomination: document.getElementById('denomination').value,
-        address: document.getElementById('address').value,
-        phone: document.getElementById('phone').value,
-        mobile: document.getElementById('mobile').value,
-        email,
-        college_university: document.getElementById('college_university').value,
-        member_role: document.getElementById('member_role').value,
-        year_of_graduation: document.getElementById('year_of_graduation').value,
-        field_of_study: document.getElementById('field_of_study').value,
-        graduate_program: document.getElementById('graduate_program').value,
-        fortnightly_amount: document.getElementById('fortnightly_amount').value,
-        monthly_amount: document.getElementById('monthly_amount').value,
-        yearly_amount: document.getElementById('yearly_amount').value,
-        donation_amount: document.getElementById('donation_amount').value,
-        membership_type: membership_type,
-        membership_amount: document.getElementById('membership_amount').value,
-        membership_new_renewal: membershipNewRenewal,
-        membership_number: document.getElementById('membership_number')?.value || '',
-        application_status: 'pending',
-        created_at: new Date().toISOString()
-      };
-      members.unshift(newMember);
-      saveMembers();
-      showToast('✅ Application submitted successfully!', 'success');
-      document.getElementById('applicationForm').reset();
-      document.getElementById('country').value = 'Papua New Guinea';
-      // reset radio defaults
-      document.querySelector('input[name="membership_new_renewal"][value="New"]').checked = true;
-      document.getElementById('renewalNumberContainer').classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+# 3. Backend setup
+cd backend
+npm install
+cp .env.example .env   # then edit DB_PASSWORD
+npm run dev            # runs on http://localhost:5000
 
-    // renewal number field toggle
-    const renewalRadios = document.querySelectorAll('input[name="membership_new_renewal"]');
-    const renewalDiv = document.getElementById('renewalNumberContainer');
-    function toggleRenewalField() {
-      const selected = document.querySelector('input[name="membership_new_renewal"]:checked')?.value;
-      if(selected === 'Renewal') renewalDiv.classList.remove('hidden');
-      else renewalDiv.classList.add('hidden');
-    }
-    renewalRadios.forEach(r => r.addEventListener('change', toggleRenewalField));
-    toggleRenewalField();
+# 4. Frontend setup (new terminal)
+cd frontend
+npm install
+npm start              # runs on http://localhost:3000</code></pre>
+          <div class="bg-blue-50 p-4 rounded-lg mt-2">
+            <p class="text-sm"><i class="fas fa-info-circle text-blue-600"></i> Ensure your <code>.env</code> inside backend contains: <code>DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, PORT=5000</code>. The frontend proxy points to backend at port 5000 automatically.</p>
+          </div>
+        </div>
+      </section>
 
-    // Admin toggle visibility
-    const adminBtn = document.getElementById('adminToggleBtn');
-    const adminPanelDiv = document.getElementById('adminPanel');
-    adminBtn.addEventListener('click', () => {
-      if(adminPanelDiv.classList.contains('hidden')) {
-        adminPanelDiv.classList.remove('hidden');
-        adminBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i> Hide Admin Panel';
-      } else {
-        adminPanelDiv.classList.add('hidden');
-        adminBtn.innerHTML = '<i class="fas fa-lock mr-2"></i> Show Admin Panel (demo)';
-      }
-    });
+      <!-- API Documentation -->
+      <section id="api" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="fas fa-plug text-purple-500 mr-2"></i> API Documentation</h2>
+        <p class="mb-3 text-gray-600"><strong>Base URL:</strong> <code class="bg-gray-100">http://localhost:5000/api</code></p>
+        <div class="space-y-5">
+          <div><span class="font-mono bg-indigo-100 px-2 py-1 rounded text-sm">GET /members</span> – Retrieve all applications</div>
+          <div><span class="font-mono bg-indigo-100 px-2 py-1 rounded text-sm">GET /members/:id</span> – Get single member</div>
+          <div><span class="font-mono bg-indigo-100 px-2 py-1 rounded text-sm">POST /members</span> – Create new application (JSON body with all fields)</div>
+          <div><span class="font-mono bg-indigo-100 px-2 py-1 rounded text-sm">PUT /members/:id/status</span> – Update status (pending/approved/rejected)</div>
+          <div><span class="font-mono bg-indigo-100 px-2 py-1 rounded text-sm">DELETE /members/:id</span> – Delete application</div>
+        </div>
+        <div class="mt-5 bg-gray-50 rounded-lg p-4">
+          <p class="font-semibold text-sm">Example POST request body:</p>
+          <pre><code>{
+  "surname": "Doe", "given_name": "John", "email": "john@tscf.org",
+  "membership_type": "Student Member", "mobile": "73277901"
+}</code></pre>
+        </div>
+      </section>
 
-    // Initialize
-    loadMembersFromStorage();
-  </script>
+      <!-- Database Schema -->
+      <section id="database" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-table text-cyan-700"></i> Database Schema</h2>
+        <p class="text-gray-600 mb-3">Main table: <code class="bg-gray-100">members</code> (30+ columns)</p>
+        <div class="table-wrapper">
+          <table class="text-sm">
+            <thead><tr><th>Column</th><th>Type</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>id</td><td>SERIAL PK</td><td>Unique identifier</td></tr>
+              <tr><td>surname, given_name</td><td>VARCHAR(100) NOT NULL</td><td>Full name</td></tr>
+              <tr><td>email</td><td>VARCHAR(100) UNIQUE</td><td>Contact email</td></tr>
+              <tr><td>membership_type</td><td>VARCHAR(50)</td><td>Student/Graduate/Life/Partner</td></tr>
+              <tr><td>application_status</td><td>VARCHAR(50)</td><td>pending/approved/rejected</td></tr>
+              <tr><td>fortnightly_amount, monthly_amount, yearly_amount, donation_amount</td><td>DECIMAL(10,2)</td><td>Pledge amounts</td></tr>
+              <tr><td>graduate_program</td><td>VARCHAR(100)</td><td>Selected program</td></tr>
+              <tr><td>created_at</td><td>TIMESTAMP</td><td>Auto-filled</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xs text-gray-500">Indexes: <code>idx_members_email</code>, <code>idx_members_status</code> for performance.</p>
+      </section>
+
+      <!-- Environment Variables -->
+      <section id="env" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-3"><i class="fas fa-key text-amber-600 mr-2"></i> Environment Variables</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Variable</th><th>Required</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>DB_USER</td><td>Yes</td><td>postgres</td></tr>
+              <tr><td>DB_PASSWORD</td><td>Yes</td><td>(none)</td></tr>
+              <tr><td>DB_HOST</td><td>Yes</td><td>localhost</td></tr>
+              <tr><td>DB_PORT</td><td>Yes</td><td>5432</td></tr>
+              <tr><td>DB_DATABASE</td><td>Yes</td><td>tscf_db</td></tr>
+              <tr><td>PORT</td><td>No</td><td>5000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Dev Workflow -->
+      <section id="workflow" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="fas fa-code-branch text-fuchsia-600 mr-2"></i> Development Workflow</h2>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+          <li>Use feature branches: <code>git checkout -b feature/your-feature</code></li>
+          <li>Commit convention: <code>feat:, fix:, docs:, style:, refactor:, test:, chore:</code></li>
+          <li>Run backend in dev mode: <code>npm run dev</code> (nodemon hot reload)</li>
+          <li>Run frontend: <code>npm start</code> with proxy to backend</li>
+          <li>Build frontend: <code>npm run build</code> → static files in <code>build/</code></li>
+        </ul>
+      </section>
+
+      <!-- Deployment Guide -->
+      <section id="deployment" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-3"><i class="fas fa-cloud-upload-alt text-sky-600 mr-2"></i> Deployment Guide</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="border rounded-xl p-4"><i class="fab fa-render text-purple-500 mr-2"></i> <strong>Render (Backend)</strong><br>Connect GitHub repo, build command: <code>cd backend && npm install</code>, start: <code>node server.js</code>, add env vars.</div>
+          <div class="border rounded-xl p-4"><i class="fab fa-vercel text-black mr-2"></i> <strong>Vercel/Netlify (Frontend)</strong><br>Output <code>frontend/build</code>, set API base URL to production backend.</div>
+          <div class="border rounded-xl p-4"><i class="fas fa-server mr-2"></i> <strong>VPS (Manual)</strong><br>Use PM2: <code>pm2 start server.js --name tscf-api</code>, configure nginx reverse proxy.</div>
+          <div class="border rounded-xl p-4"><i class="fab fa-docker mr-2 text-blue-600"></i> <strong>Docker</strong><br>Multi-stage build available. See Dockerfile in repo.</div>
+        </div>
+      </section>
+
+      <!-- Contributing Guidelines -->
+      <section id="contributing" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="fas fa-hand-peace text-green-600 mr-2"></i> Contributing Guidelines</h2>
+        <p>We welcome contributions! Please follow:</p>
+        <ol class="list-decimal pl-6 mt-2 space-y-1 text-gray-700">
+          <li>Fork the repository and clone it locally.</li>
+          <li>Create a new branch: <code>git checkout -b feature/amazing-feature</code>.</li>
+          <li>Make changes, ensure code passes linting and basic tests.</li>
+          <li>Commit using conventional commits: <code>feat: add admin export</code>.</li>
+          <li>Push and open a Pull Request against <code>main</code>.</li>
+        </ol>
+        <div class="mt-4 bg-gray-50 p-3 rounded-lg text-sm">All PRs must include a clear description, screenshots for UI changes, and pass review. Issues should be reported with reproduction steps.</div>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section id="troubleshooting" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="fas fa-bug text-red-500 mr-2"></i> Troubleshooting</h2>
+        <div class="space-y-3">
+          <div><span class="font-bold">❌ Database connection error:</span> Verify PostgreSQL is running and .env credentials correct.</div>
+          <div><span class="font-bold">❌ Port 5000 already in use:</span> <code>lsof -i :5000</code> then kill process or change PORT in .env.</div>
+          <div><span class="font-bold">❌ CORS / frontend can't reach API:</span> Ensure backend proxy is configured in frontend package.json ("proxy": "http://localhost:5000") or use environment variable.</div>
+          <div><span class="font-bold">❌ Module not found:</span> Delete node_modules and run <code>npm install</code> again in both folders.</div>
+        </div>
+      </section>
+
+      <!-- Future Enhancements -->
+      <section id="future" class="anchor-heading bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-rocket text-indigo-500"></i> Future Roadmap</h2>
+        <div class="flex flex-wrap gap-3">
+          <span class="badge-new">Authentication & RBAC</span>
+          <span class="badge-new">Email notifications</span>
+          <span class="badge-new">BSP Payment Gateway</span>
+          <span class="badge-new">CSV/PDF Export</span>
+          <span class="badge-new">Analytics Dashboard</span>
+          <span class="badge-new">Mobile responsive PWA</span>
+        </div>
+        <p class="mt-4 text-sm text-gray-500">Planned: version 1.1 with admin roles, automated receipts, and SMS alerts.</p>
+      </section>
+
+      <!-- Footer / contact -->
+      <div class="text-center text-gray-500 text-sm border-t border-gray-200 pt-8 mt-6">
+        <i class="far fa-copyright mr-1"></i> Tertiary Students Christian Fellowship 2026 · Documentation v1.0<br>
+        For support or contributions: <a href="#" class="text-indigo-600">scottbilau@gmail.com</a> · GitHub: <span class="font-mono">/Scott2020747/tscf_biodb</span>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
