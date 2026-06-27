@@ -1,0 +1,48 @@
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+// PUBLIC
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+
+// ADMIN
+import Login from "./pages/admin/Login";
+import Dashboard from "./pages/admin/Dashboard";
+import Members from "./pages/admin/Members";
+import MemberDetails from "./pages/admin/MemberDetails";
+import Reports from "./pages/admin/Reports";
+import Settings from "./pages/admin/Settings";
+
+// LAYOUTS
+import MainLayout from "./layouts/MainLayout";
+import AdminLayout from "./layouts/AdminLayout";
+
+export default function App() {
+  return (
+    <Routes>
+
+      {/* PUBLIC */}
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Route>
+
+      {/* ADMIN LOGIN */}
+      <Route path="/admin/login" element={<Login />} />
+
+      {/* ADMIN PANEL */}
+      <Route element={<AdminLayout />}>
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/members" element={<Members />} />
+        <Route path="/admin/members/:id" element={<MemberDetails />} />
+        <Route path="/admin/reports" element={<Reports />} />
+        <Route path="/admin/settings" element={<Settings />} />
+      </Route>
+
+    </Routes>
+  );
+}
