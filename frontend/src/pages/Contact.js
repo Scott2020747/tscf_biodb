@@ -1,92 +1,76 @@
-import React from "react";
+import React from 'react';
 
 export default function Contact() {
   return (
-    <div className="container section-spacing">
-
-      <div className="glass-card">
-
-        <h1>Contact Us</h1>
-
-        <div style={{ marginTop: "25px" }}>
-
-          <h3>TSCF National Office</h3>
-
-          <p>
-            Tertiary Students Christian Fellowship
-          </p>
-
-          <p>
-            Papua New Guinea
-          </p>
-
-          <br />
-
-          <p>
-            📞 Phone: +675 XXX XXXX
-          </p>
-
-          <p>
-            📧 Email: info@tscfpng.org
-          </p>
-
-          <p>
-            🌐 Website: www.tscfpng.org
-          </p>
-
+    <div className="min-h-screen py-12 px-4" style={{ background: 'linear-gradient(135deg, #4ea9e5 0%, #0050b5 50%, #00125c 100%)' }}>
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-5xl font-bold text-white text-center mb-8">Contact Us</h1>
+        
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+            <h2 className="text-2xl font-bold text-white mb-4">Get in Touch</h2>
+            
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">📞</span>
+                <div>
+                  <p className="text-white/70 text-sm">Phone</p>
+                  <p className="text-white font-semibold">+675 73277901</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">📧</span>
+                <div>
+                  <p className="text-white/70 text-sm">Email</p>
+                  <p className="text-white font-semibold">info@tscfpng.org</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">📍</span>
+                <div>
+                  <p className="text-white/70 text-sm">Address</p>
+                  <p className="text-white font-semibold">P. O. Box 6329</p>
+                  <p className="text-white">Port Boroko, National Capital District</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+            <h2 className="text-2xl font-bold text-white mb-4">🏦 Banking Details</h2>
+            
+            <div className="space-y-3">
+              <div>
+                <p className="text-white/70 text-sm">Account Name</p>
+                <p className="text-white font-semibold">Tertiary Students Christian Fellowship</p>
+              </div>
+              
+              <div>
+                <p className="text-white/70 text-sm">Account Number</p>
+                <p className="text-white font-mono font-bold">1000435676</p>
+              </div>
+              
+              <div>
+                <p className="text-white/70 text-sm">Bank</p>
+                <p className="text-white font-semibold">Bank South Pacific (BSP)</p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-white/70 text-sm">BSB</p>
+                  <p className="text-white font-mono font-bold">088-943</p>
+                </div>
+                <div>
+                  <p className="text-white/70 text-sm">SWIFT</p>
+                  <p className="text-white font-mono font-bold">BOSPPGPM</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
-
-      <div
-        className="glass-card"
-        style={{ marginTop: "30px" }}
-      >
-
-        <h2>Vision Partners Banking Details</h2>
-
-        <br />
-
-        <p>
-          <strong>Account Name:</strong>
-          <br />
-          Tertiary Students Christian Fellowship
-        </p>
-
-        <br />
-
-        <p>
-          <strong>Account Number:</strong>
-          <br />
-          1000435676
-        </p>
-
-        <br />
-
-        <p>
-          <strong>Bank:</strong>
-          <br />
-          Bank South Pacific (BSP)
-        </p>
-
-        <br />
-
-        <p>
-          <strong>BSB:</strong>
-          <br />
-          088-943
-        </p>
-
-        <br />
-
-        <p>
-          <strong>SWIFT:</strong>
-          <br />
-          BOSPPGPM
-        </p>
-
-      </div>
-
     </div>
   );
 }
