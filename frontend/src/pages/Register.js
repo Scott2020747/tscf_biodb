@@ -162,7 +162,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Surname *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="surname"
                 value={formData.surname}
                 onChange={handleChange}
@@ -172,7 +172,7 @@ export default function Register() {
 
             <div>
               <label>Given Name *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="given_name"
                 value={formData.given_name}
                 onChange={handleChange}
@@ -182,7 +182,7 @@ export default function Register() {
 
             <div>
               <label>Institution *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="institution"
                 value={formData.institution}
                 onChange={handleChange}
@@ -192,7 +192,7 @@ export default function Register() {
 
             <div>
               <label>Date of Birth *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="date"
                 name="dob"
                 value={formData.dob}
@@ -202,7 +202,7 @@ export default function Register() {
 
             <div>
               <label>Sex *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="sex"
                 value={formData.sex}
                 onChange={handleChange}
@@ -215,7 +215,7 @@ export default function Register() {
 
             <div>
               <label>Marital Status *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="marital_status"
                 value={formData.marital_status}
                 onChange={handleChange}
@@ -234,7 +234,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Province *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="province"
                 value={formData.province}
                 onChange={handleChange}
@@ -267,7 +267,7 @@ export default function Register() {
 
             <div>
               <label>Country *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
@@ -277,7 +277,7 @@ export default function Register() {
 
             <div>
               <label>Denomination</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="denomination"
                 value={formData.denomination}
                 onChange={handleChange}
@@ -302,7 +302,7 @@ export default function Register() {
 
           <div style={{ marginTop: "20px" }}>
             <label>Residential Address *</label>
-            <textarea
+              <textarea className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               rows="4"
               name="address"
               value={formData.address}
@@ -316,7 +316,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Phone</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -326,7 +326,7 @@ export default function Register() {
 
             <div>
               <label>Mobile *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}
@@ -336,7 +336,7 @@ export default function Register() {
 
             <div>
               <label>Email Address *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -362,7 +362,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>College / University *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="college_university"
                 value={formData.college_university}
                 onChange={handleChange}
@@ -372,7 +372,7 @@ export default function Register() {
 
             <div>
               <label>Campus Location *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="campus_location"
                 value={formData.campus_location}
                 onChange={handleChange}
@@ -382,7 +382,7 @@ export default function Register() {
 
             <div>
               <label>Student ID (optional)</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="student_id"
                 value={formData.student_id}
                 onChange={handleChange}
@@ -392,7 +392,7 @@ export default function Register() {
 
             <div>
               <label>Field of Study *</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="field_of_study"
                 value={formData.field_of_study}
                 onChange={handleChange}
@@ -402,7 +402,7 @@ export default function Register() {
 
             <div>
               <label>Year Graduated *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="graduation_year"
                 value={formData.graduation_year}
                 onChange={handleChange}
@@ -422,7 +422,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Membership Role *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="membership_role"
                 value={formData.membership_role}
                 onChange={handleChange}
@@ -440,7 +440,7 @@ export default function Register() {
 
             <div>
               <label>Leadership Position</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="leadership_role"
                 value={formData.leadership_role}
                 onChange={handleChange}
@@ -450,7 +450,7 @@ export default function Register() {
 
             <div>
               <label>Years in TSCF *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="years_in_tscf"
                 value={formData.years_in_tscf}
                 onChange={handleChange}
@@ -490,7 +490,7 @@ export default function Register() {
               'Empowerment Training'
             ].map((program) => (
               <label key={program} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
-                <input
+                 <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                   type="checkbox"
                   name="graduate_programs"
                   value={program}
@@ -529,7 +529,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Fortnightly Amount (K)</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="fortnightly_amount"
@@ -541,7 +541,7 @@ export default function Register() {
 
             <div>
               <label>Monthly Amount (K)</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="monthly_amount"
@@ -553,7 +553,7 @@ export default function Register() {
 
             <div>
               <label>Yearly Amount (K)</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="yearly_amount"
@@ -565,7 +565,7 @@ export default function Register() {
 
             <div>
               <label>One-time Donation (K)</label>
-              <input
+               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="donation_amount"
@@ -581,7 +581,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Select Membership Type *</label>
-              <select
+               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="membership_type"
                 value={formData.membership_type}
                 onChange={handleChange}
@@ -653,7 +653,7 @@ export default function Register() {
           </div>
 
           <div style={{ marginTop: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
-            <input
+             <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               type="checkbox"
               name="declaration"
               checked={formData.declaration}

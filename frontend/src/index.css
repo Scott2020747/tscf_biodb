@@ -341,3 +341,26 @@ body {
 .tscf-gradient-bg {
   background: linear-gradient(135deg, #4ea9e5 0%, #0050b5 50%, #00125c 100%);
 }
+
+/* ============================
+   FORM INPUTS - BLACK TEXT
+   ============================ */
+
+.wizard-grid input,
+.wizard-grid select,
+.wizard-grid textarea {
+  color: #1a2c3e !important;
+  background: white !important;
+}
+
+.wizard-grid input::placeholder,
+.wizard-grid textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+.wizard-grid input:focus,
+.wizard-grid select:focus,
+.wizard-grid textarea:focus {
+  color: #1a2c3e !important;
+  background: white !important;
+}
