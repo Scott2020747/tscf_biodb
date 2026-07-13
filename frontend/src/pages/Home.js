@@ -14,21 +14,21 @@ export default function Home() {
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/25 transition-all">
-            <div className="text-4xl mb-4">🎯</div>
+            <div className="text-4xl mb-4"></div>
             <h3 className="text-xl font-bold text-white mb-2">Our Vision</h3>
             <p className="text-white/80 text-sm">
               Mobilizing graduates to impact the marketplace and nation
             </p>
           </div>
           <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/25 transition-all">
-            <div className="text-4xl mb-4">📢</div>
+            <div className="text-4xl mb-4"></div>
             <h3 className="text-xl font-bold text-white mb-2">Our Mission</h3>
             <p className="text-white/80 text-sm">
               Promoting kingdom mindset through divine alignment
             </p>
           </div>
           <div className="bg-white/15 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/25 transition-all">
-            <div className="text-4xl mb-4">❤️</div>
+            <div className="text-4xl mb-4"></div>
             <h3 className="text-xl font-bold text-white mb-2">Core Values</h3>
             <p className="text-white/80 text-sm">
               Truth, Servant Leadership, Integrity, Teamwork
