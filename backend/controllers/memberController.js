@@ -1,8 +1,13 @@
 const pool = require("../config/db");
 
-// ================================
+const {
+  sendWelcomeEmail,
+  sendAdminNotification,
+} = require("../services/emailService");
+
+// ==========================================
 // HELPER: Generate Membership Number
-// ================================
+// ==========================================
 const generateMembershipNumber = (id, type) => {
   const prefix =
     type === "Student Member"
@@ -16,9 +21,9 @@ const generateMembershipNumber = (id, type) => {
   return `${prefix}-${new Date().getFullYear()}-${id}`;
 };
 
-// ================================
+// ==========================================
 // CREATE MEMBER (REGISTER FORM)
-// ================================
+// ==========================================
 const createMember = async (req, res) => {
   try {
     const {
@@ -40,17 +45,34 @@ const createMember = async (req, res) => {
       leadership_role,
       graduation_year,
       field_of_study,
-      membership_type
+      membership_type,
     } = req.body;
 
-    const result = await pool.query(
+    // ==========================================
+    // INSERT MEMBER
+    // ==========================================
+    const insertResult = await pool.query(
       `
       INSERT INTO members (
-        surname, given_name, institution, dob, sex,
-        marital_status, home_province, country, denomination,
-        address, phone, mobile, email,
-        university_attended, membership_role, leadership_role,
-        graduation_year, field_of_study, membership_type
+        surname,
+        given_name,
+        institution,
+        dob,
+        sex,
+        marital_status,
+        home_province,
+        country,
+        denomination,
+        address,
+        phone,
+        mobile,
+        email,
+        university_attended,
+        membership_role,
+        leadership_role,
+        graduation_year,
+        field_of_study,
+        membership_type
       )
       VALUES (
         $1,$2,$3,$4,$5,
@@ -80,36 +102,77 @@ const createMember = async (req, res) => {
         leadership_role,
         graduation_year,
         field_of_study,
-        membership_type
+        membership_type,
       ]
     );
 
-    const member = result.rows[0];
+    const member = insertResult.rows[0];
 
-    // generate membership number after insert
+    // ==========================================
+    // GENERATE MEMBERSHIP NUMBER
+    // ==========================================
     const membership_number = generateMembershipNumber(
       member.id,
       member.membership_type
     );
 
-    await pool.query(
-      `UPDATE members SET membership_number=$1 WHERE id=$2`,
+    const updateResult = await pool.query(
+      `
+      UPDATE members
+      SET membership_number = $1
+      WHERE id = $2
+      RETURNING membership_number
+      `,
       [membership_number, member.id]
     );
 
+    if (updateResult.rowCount === 0) {
+      throw new Error("Failed to update membership number.");
+    }
+
+    member.membership_number = membership_number;
+
+    // ==========================================
+    // RETURN SUCCESS IMMEDIATELY
+    // ==========================================
     res.status(201).json({
       message: "Member registered successfully",
-      member: { ...member, membership_number }
+      member,
     });
+
+    // ==========================================
+    // SEND EMAILS IN BACKGROUND
+    // ==========================================
+    (async () => {
+      try {
+        await Promise.all([
+          sendWelcomeEmail(member),
+          sendAdminNotification(member),
+        ]);
+
+        console.log(
+          `Registration emails successfully sent for ${member.membership_number}`
+        );
+      } catch (err) {
+        console.error(
+          `Unable to send registration emails for ${member.membership_number}:`,
+          err
+        );
+      }
+    })();
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    console.error("Member registration failed:", error);
+
+    res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
   }
 };
 
-// ================================
-// GET ALL MEMBERS (ADMIN)
-// ================================
+// ==========================================
+// GET ALL MEMBERS
+// ==========================================
 const getAllMembers = async (req, res) => {
   try {
     const result = await pool.query(
@@ -118,35 +181,45 @@ const getAllMembers = async (req, res) => {
 
     res.json(result.rows);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
-// ================================
-// GET SINGLE MEMBER
-// ================================
+// ==========================================
+// GET MEMBER BY ID
+// ==========================================
 const getMemberById = async (req, res) => {
   try {
     const { id } = req.params;
 
     const result = await pool.query(
-      `SELECT * FROM members WHERE id=$1`,
+      `SELECT * FROM members WHERE id = $1`,
       [id]
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: "Member not found" });
+      return res.status(404).json({
+        message: "Member not found",
+      });
     }
 
     res.json(result.rows[0]);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
-// ================================
+// ==========================================
 // UPDATE MEMBER
-// ================================
+// ==========================================
 const updateMember = async (req, res) => {
   try {
     const { id } = req.params;
@@ -156,72 +229,126 @@ const updateMember = async (req, res) => {
       mobile,
       address,
       denomination,
-      field_of_study
+      field_of_study,
     } = req.body;
 
     const result = await pool.query(
       `
       UPDATE members
-      SET phone=$1,
-          mobile=$2,
-          address=$3,
-          denomination=$4,
-          field_of_study=$5
-      WHERE id=$6
+      SET
+        phone = $1,
+        mobile = $2,
+        address = $3,
+        denomination = $4,
+        field_of_study = $5
+      WHERE id = $6
       RETURNING *
       `,
-      [phone, mobile, address, denomination, field_of_study, id]
+      [
+        phone,
+        mobile,
+        address,
+        denomination,
+        field_of_study,
+        id,
+      ]
     );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message: "Member not found",
+      });
+    }
 
     res.json({
       message: "Member updated successfully",
-      member: result.rows[0]
+      member: result.rows[0],
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
-// ================================
+// ==========================================
 // DELETE MEMBER
-// ================================
+// ==========================================
 const deleteMember = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await pool.query(`DELETE FROM members WHERE id=$1`, [id]);
+    const result = await pool.query(
+      `DELETE FROM members WHERE id = $1`,
+      [id]
+    );
 
-    res.json({ message: "Member deleted successfully" });
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message: "Member not found",
+      });
+    }
+
+    res.json({
+      message: "Member deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
-// ================================
+// ==========================================
 // UPDATE APPLICATION STATUS
-// ================================
+// ==========================================
 const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
-    const validStatuses = ["Pending", "Approved", "Rejected"];
+    const validStatuses = [
+      "Pending",
+      "Approved",
+      "Rejected",
+    ];
 
     if (!validStatuses.includes(status)) {
-      return res.status(400).json({ message: "Invalid status" });
+      return res.status(400).json({
+        message: "Invalid status",
+      });
     }
 
     const result = await pool.query(
-      `UPDATE members SET application_status=$1 WHERE id=$2 RETURNING *`,
+      `
+      UPDATE members
+      SET application_status = $1
+      WHERE id = $2
+      RETURNING *
+      `,
       [status, id]
     );
 
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message: "Member not found",
+      });
+    }
+
     res.json({
       message: `Application ${status}`,
-      member: result.rows[0]
+      member: result.rows[0],
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
@@ -231,5 +358,5 @@ module.exports = {
   getMemberById,
   updateMember,
   deleteMember,
-  updateStatus
+  updateStatus,
 };
