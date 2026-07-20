@@ -181,7 +181,7 @@ export default function Dashboard() {
     }]
   };
 
-  const membershipTypeColors = ['#1a3a5c', '#2a5a7a', '#3a7a9a', '#4a8aaa', '#e8a53e'];
+  const membershipTypeColors = ['#1a3a5c', '#2a5a7a', '#3a7a9a', '#5c9bbc', '#e8a53e'];
   const membershipTypeData = {
     labels: Object.keys(stats.membershipTypes),
     datasets: [{ 
