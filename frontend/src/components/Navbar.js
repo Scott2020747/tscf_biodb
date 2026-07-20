@@ -1,15 +1,29 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/tscf-logo.png';
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    setIsAdmin(!!token);
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUser');
+    setIsAdmin(false);
+    navigate('/');
+  };
 
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
-    { path: '/register', label: 'Register' }
+    { path: '/register', label: 'Register' },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -35,6 +49,34 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          
+          {isAdmin ? (
+            <>
+              <Link
+                to="/dashboard"
+                className={`px-4 py-2 rounded-lg transition-all duration-200 ${
+                  isActive('/dashboard')
+                    ? 'bg-green-500/30 text-white font-bold'
+                    : 'text-green-400 hover:bg-green-500/20 hover:text-green-300'
+                }`}
+              >
+                📊 Dashboard
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 rounded-lg transition-all duration-200 text-red-400 hover:bg-red-500/20 hover:text-red-300"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/admin/login"
+              className="px-4 py-2 rounded-lg transition-all duration-200 text-yellow-400 hover:bg-yellow-500/20 hover:text-yellow-300"
+            >
+              🔐 Admin
+            </Link>
+          )}
         </div>
       </div>
     </nav>

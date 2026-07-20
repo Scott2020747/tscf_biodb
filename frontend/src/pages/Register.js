@@ -6,6 +6,8 @@ import StepCard from "../components/StepCard";
 export default function Register() {
   const TOTAL_STEPS = 5;
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [formData, setFormData] = useState({
     // STEP 1 - Personal Information
@@ -137,6 +139,150 @@ export default function Register() {
   };
 
   // ================================
+  // SUBMIT HANDLER
+  // ================================
+
+  const handleSubmit = async () => {
+    // Reset error
+    setSubmitError("");
+
+    // Validate declaration
+    if (!formData.declaration) {
+      alert("Please confirm the declaration before submitting.");
+      return;
+    }
+
+    // Validate all steps before submitting
+    if (!validateStep1()) return;
+    if (!validateStep2()) return;
+
+    // Check if membership type is selected
+    if (!formData.membership_type) {
+      alert("Please select a membership type.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // ================================
+      // FULL PAYLOAD - ALL FIELDS MAPPED
+      // ================================
+      const payload = {
+        // ================================
+        // STEP 1: Personal Information
+        // ================================
+        surname: formData.surname,
+        given_name: formData.given_name,
+        institution: formData.institution,
+        dob: formData.dob,
+        sex: formData.sex,
+        marital_status: formData.marital_status,
+        home_province: formData.province, // Map province → home_province
+        country: formData.country,
+        denomination: formData.denomination,
+        address: formData.address,
+        phone: formData.phone,
+        mobile: formData.mobile,
+        email: formData.email,
+
+        // ================================
+        // STEP 2: Educational Information
+        // ================================
+        university_attended: formData.college_university, // Map college_university → university_attended
+        campus_location: formData.campus_location,
+        student_id: formData.student_id,
+        membership_role: formData.membership_role,
+        leadership_role: formData.leadership_role,
+        graduation_year: formData.graduation_year ? parseInt(formData.graduation_year) : null,
+        field_of_study: formData.field_of_study,
+        years_in_tscf: formData.years_in_tscf,
+
+        // ================================
+        // STEP 3: Graduate Programs
+        // ================================
+        graduate_programs: formData.graduate_programs || [],
+
+        // ================================
+        // STEP 4: Financial Partnership & Membership
+        // ================================
+        membership_type: formData.membership_type,
+        fortnightly_amount: formData.fortnightly_amount ? parseFloat(formData.fortnightly_amount) : 0,
+        monthly_amount: formData.monthly_amount ? parseFloat(formData.monthly_amount) : 0,
+        yearly_amount: formData.yearly_amount ? parseFloat(formData.yearly_amount) : 0,
+        donation_amount: formData.donation_amount ? parseFloat(formData.donation_amount) : 0
+      };
+
+      console.log("🚀 Submitting payload:", payload);
+
+      // Use relative URL for development, absolute for production
+      const apiUrl = process.env.NODE_ENV === 'production' 
+        ? '/api/members'
+        : '/api/members';
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      console.log("📨 Server response:", result);
+
+      if (!response.ok) {
+        throw new Error(result.message || "Registration failed. Please try again.");
+      }
+
+      // Success!
+      alert("🎉 Application submitted successfully! You will receive a confirmation email.");
+      
+      // Reset form
+      setFormData({
+        surname: "",
+        given_name: "",
+        institution: "",
+        dob: "",
+        sex: "",
+        marital_status: "",
+        province: "",
+        country: "Papua New Guinea",
+        denomination: "",
+        address: "",
+        phone: "",
+        mobile: "",
+        email: "",
+        college_university: "",
+        campus_location: "",
+        student_id: "",
+        field_of_study: "",
+        graduation_year: "",
+        membership_role: "",
+        leadership_role: "",
+        years_in_tscf: "",
+        graduate_programs: [],
+        fortnightly_amount: "",
+        monthly_amount: "",
+        yearly_amount: "",
+        donation_amount: "",
+        membership_type: "",
+        declaration: false
+      });
+      setStep(1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    } catch (err) {
+      console.error("❌ Submission error:", err);
+      setSubmitError(err.message);
+      alert(`Registration failed.\n\n${err.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // ================================
   // RENDER
   // ================================
 
@@ -152,6 +298,13 @@ export default function Register() {
       {/* PROGRESS BAR */}
       <ProgressBar currentStep={step} totalSteps={TOTAL_STEPS} />
 
+      {/* Show error if any */}
+      {submitError && (
+        <div className="bg-red-500/20 border border-red-500 text-white p-4 rounded-lg mb-4">
+          <strong>Error:</strong> {submitError}
+        </div>
+      )}
+
       {/* ============================================================
           STEP 1: GENERAL INFORMATION
           ============================================================ */}
@@ -162,7 +315,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Surname *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="surname"
                 value={formData.surname}
                 onChange={handleChange}
@@ -172,7 +325,7 @@ export default function Register() {
 
             <div>
               <label>Given Name *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="given_name"
                 value={formData.given_name}
                 onChange={handleChange}
@@ -182,7 +335,7 @@ export default function Register() {
 
             <div>
               <label>Institution *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="institution"
                 value={formData.institution}
                 onChange={handleChange}
@@ -192,7 +345,7 @@ export default function Register() {
 
             <div>
               <label>Date of Birth *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="date"
                 name="dob"
                 value={formData.dob}
@@ -202,7 +355,7 @@ export default function Register() {
 
             <div>
               <label>Sex *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="sex"
                 value={formData.sex}
                 onChange={handleChange}
@@ -215,7 +368,7 @@ export default function Register() {
 
             <div>
               <label>Marital Status *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="marital_status"
                 value={formData.marital_status}
                 onChange={handleChange}
@@ -234,7 +387,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Province *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="province"
                 value={formData.province}
                 onChange={handleChange}
@@ -267,7 +420,7 @@ export default function Register() {
 
             <div>
               <label>Country *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
@@ -277,7 +430,7 @@ export default function Register() {
 
             <div>
               <label>Denomination</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="denomination"
                 value={formData.denomination}
                 onChange={handleChange}
@@ -302,7 +455,7 @@ export default function Register() {
 
           <div style={{ marginTop: "20px" }}>
             <label>Residential Address *</label>
-              <textarea className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+            <textarea className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
               rows="4"
               name="address"
               value={formData.address}
@@ -316,7 +469,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Phone</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -326,7 +479,7 @@ export default function Register() {
 
             <div>
               <label>Mobile *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleChange}
@@ -336,7 +489,7 @@ export default function Register() {
 
             <div>
               <label>Email Address *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -362,7 +515,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>College / University *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="college_university"
                 value={formData.college_university}
                 onChange={handleChange}
@@ -372,7 +525,7 @@ export default function Register() {
 
             <div>
               <label>Campus Location *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="campus_location"
                 value={formData.campus_location}
                 onChange={handleChange}
@@ -382,7 +535,7 @@ export default function Register() {
 
             <div>
               <label>Student ID (optional)</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="student_id"
                 value={formData.student_id}
                 onChange={handleChange}
@@ -392,7 +545,7 @@ export default function Register() {
 
             <div>
               <label>Field of Study *</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="field_of_study"
                 value={formData.field_of_study}
                 onChange={handleChange}
@@ -402,7 +555,7 @@ export default function Register() {
 
             <div>
               <label>Year Graduated *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="graduation_year"
                 value={formData.graduation_year}
                 onChange={handleChange}
@@ -422,7 +575,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Membership Role *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="membership_role"
                 value={formData.membership_role}
                 onChange={handleChange}
@@ -440,7 +593,7 @@ export default function Register() {
 
             <div>
               <label>Leadership Position</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="leadership_role"
                 value={formData.leadership_role}
                 onChange={handleChange}
@@ -450,7 +603,7 @@ export default function Register() {
 
             <div>
               <label>Years in TSCF *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="years_in_tscf"
                 value={formData.years_in_tscf}
                 onChange={handleChange}
@@ -490,7 +643,7 @@ export default function Register() {
               'Empowerment Training'
             ].map((program) => (
               <label key={program} style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
-                 <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+                <input
                   type="checkbox"
                   name="graduate_programs"
                   value={program}
@@ -504,8 +657,9 @@ export default function Register() {
                         : prev.graduate_programs.filter(p => p !== value)
                     }));
                   }}
+                  className="w-4 h-4 accent-blue-500"
                 />
-                <span>{program}</span>
+                <span className="text-white">{program}</span>
               </label>
             ))}
           </div>
@@ -529,7 +683,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Fortnightly Amount (K)</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="fortnightly_amount"
@@ -541,7 +695,7 @@ export default function Register() {
 
             <div>
               <label>Monthly Amount (K)</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="monthly_amount"
@@ -553,7 +707,7 @@ export default function Register() {
 
             <div>
               <label>Yearly Amount (K)</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="yearly_amount"
@@ -565,7 +719,7 @@ export default function Register() {
 
             <div>
               <label>One-time Donation (K)</label>
-               <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 type="number"
                 step="0.01"
                 name="donation_amount"
@@ -581,7 +735,7 @@ export default function Register() {
           <div className="wizard-grid">
             <div>
               <label>Select Membership Type *</label>
-               <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 name="membership_type"
                 value={formData.membership_type}
                 onChange={handleChange}
@@ -653,12 +807,13 @@ export default function Register() {
           </div>
 
           <div style={{ marginTop: "16px", display: "flex", alignItems: "center", gap: "12px" }}>
-             <input className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+            <input
               type="checkbox"
               name="declaration"
               checked={formData.declaration}
               onChange={handleChange}
               style={{ width: "20px", height: "20px", cursor: "pointer" }}
+              className="accent-blue-500"
             />
             <label style={{ color: "white", fontSize: "15px", cursor: "pointer" }}>
               I declare that the information provided is true and accurate to the best of my knowledge.
@@ -672,13 +827,13 @@ export default function Register() {
           ============================================================ */}
       <div className="wizard-buttons">
         {step > 1 && (
-          <button className="secondary-btn" onClick={previousStep}>
+          <button className="secondary-btn" onClick={previousStep} disabled={isSubmitting}>
             ← Previous
           </button>
         )}
 
         {step < TOTAL_STEPS && (
-          <button className="primary-btn" onClick={nextStep}>
+          <button className="primary-btn" onClick={nextStep} disabled={isSubmitting}>
             Next →
           </button>
         )}
@@ -686,16 +841,21 @@ export default function Register() {
         {step === TOTAL_STEPS && (
           <button
             className="primary-btn"
-            onClick={() => {
-              if (!formData.declaration) {
-                alert("Please confirm the declaration before submitting.");
-                return;
-              }
-              alert("🎉 Application submitted successfully! You will receive a confirmation email.");
-              console.log("Form submitted:", formData);
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            style={{
+              opacity: isSubmitting ? 0.7 : 1,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer'
             }}
           >
-            ✅ Submit Application
+            {isSubmitting ? (
+              <>
+                <span className="inline-block animate-spin mr-2">⟳</span>
+                Submitting...
+              </>
+            ) : (
+              '✅ Submit Application'
+            )}
           </button>
         )}
       </div>
